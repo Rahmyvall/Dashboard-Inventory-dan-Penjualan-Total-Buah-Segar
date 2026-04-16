@@ -4,10 +4,6 @@
   </a>
 </p>
 
-<p align="center">
- <a><img src="public/assets/Landing Page.png"><a>
-</p>
-
 <h1 align="center">🍓 FreshHarvest Dashboard</h1>
 <p align="center">
   <strong>Dashboard Real-time Total Buah Segar</strong><br>
@@ -45,9 +41,9 @@ Dibangun dengan **Laravel**, **Tailwind CSS**, **Livewire**, dan **Alpine.js** �
 
 _(Tambahkan screenshot dashboard kamu di sini)_
 
-![Dashboard Preview](https://via.placeholder.com/800x450/4CAF50/ffffff?text=FreshHarvest+Dashboard)
-
-![Mobile View](https://via.placeholder.com/400x600/FF9800/ffffff?text=Mobile+View)
+<p align="center">
+ <a><img src="public/assets/Landing Page.png"><a>
+</p>
 
 ## 🚀 Instalasi Cepat
 
