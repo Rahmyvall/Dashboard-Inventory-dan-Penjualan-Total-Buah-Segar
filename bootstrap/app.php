@@ -11,7 +11,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        
+        // Redirect otomatis (opsional tapi sangat membantu)
+        $middleware->redirectGuestsTo('/login');     // Tamu → halaman login
+        // $middleware->redirectUsersTo('/dashboard'); // User login → dashboard
+
+        // Jika ingin menambahkan middleware global lain (contoh):
+        // $middleware->append(\App\Http\Middleware\LogRequest::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

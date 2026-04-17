@@ -44,11 +44,14 @@ _(Tambahkan screenshot dashboard kamu di sini)_
 <p align="center">
  <a><img src="public/assets/Landing Page.png"><a>
 </p>
+<p align="center">
+ <a><img src="public/assets/login.png"><a>
+</p>
 
 ## 🚀 Instalasi Cepat
 
 ```bash
-git clone https://github.com/username/freshharvest-dashboard.git
+git clone https://github.com/Rahmyvall/Dashboard-Inventory-dan-Penjualan-Total-Buah-Segar.git
 cd freshharvest-dashboard
 
 composer install

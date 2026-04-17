@@ -89,7 +89,7 @@
                     <span id="soundText">Suara Aktif</span>
                 </button>
 
-                <button onclick="playClickSound(); window.location.href='#'"
+                <button onclick="playClickSound(); window.location.href='{{ route('login') }}'"
                     class="px-8 py-3 text-sm font-semibold rounded-2xl border border-white/30 hover:border-white/60 hover:bg-white/10 transition-all duration-300">
                     Masuk
                 </button>
@@ -109,15 +109,15 @@
                     <span class="font-medium">Fresh Every Day</span>
                 </div>
 
-               <h1 class="text-6xl lg:text-7xl font-semibold leading-none tracking-tighter">
-    Mau buah yang benar-benar segar?<br>
-    <span class="gradient-text">Kami antar langsung dari kebun</span>
-</h1>
+                <h1 class="text-6xl lg:text-7xl font-semibold leading-none tracking-tighter">
+                    Mau buah yang benar-benar segar?<br>
+                    <span class="gradient-text">Kami antar langsung dari kebun</span>
+                </h1>
 
-<p class="text-xl text-gray-200 max-w-lg">
-    Dipetik pagi ini, diantar sore ini. Kualitas premium yang bikin kamu 
-    nggak mau beli buah di tempat lain lagi.
-</p>
+                <p class="text-xl text-gray-200 max-w-lg">
+                    Dipetik pagi ini, diantar sore ini. Kualitas premium yang bikin kamu
+                    nggak mau beli buah di tempat lain lagi.
+                </p>
                 <div class="flex flex-wrap gap-4">
                     <!-- Tombol Pesan Sekarang dengan efek suara -->
                     <button onclick="playClickSound(); window.location.href='#'"
@@ -145,21 +145,21 @@
                         <!-- Badge dengan efek suara hover -->
                         <div class="absolute -top-4 -right-4 flex flex-col items-end gap-3">
                             <div onclick="playHoverSound()"
-                                class="glass px-6 py-3 rounded-3xl text-base font-semibold shadow-2xl flex items-center gap-2.5 
+                                class="glass px-6 py-3 rounded-3xl text-base font-semibold shadow-2xl flex items-center gap-2.5
                                 bg-gradient-to-r from-lime-400 to-green-500 text-white border border-white/30 cursor-pointer hover:scale-110 transition-all">
                                 <span class="text-xl animate-pulse">🔥</span>
                                 Promo 30%
                             </div>
 
                             <div onclick="playHoverSound()"
-                                class="glass px-6 py-3 rounded-3xl text-sm font-semibold shadow-2xl flex items-center gap-2 
+                                class="glass px-6 py-3 rounded-3xl text-sm font-semibold shadow-2xl flex items-center gap-2
                                 bg-gradient-to-r from-amber-400 to-orange-500 text-white border border-white/30 cursor-pointer hover:scale-105 transition-all">
                                 <span class="text-lg">💰</span>
                                 Diskon Besar
                             </div>
 
                             <div onclick="playHoverSound()"
-                                class="glass px-6 py-3 rounded-3xl text-sm font-semibold shadow-2xl flex items-center gap-2 
+                                class="glass px-6 py-3 rounded-3xl text-sm font-semibold shadow-2xl flex items-center gap-2
                                 bg-gradient-to-r from-red-500 to-rose-600 text-white border border-white/30 cursor-pointer hover:scale-105 transition-all">
                                 <span class="relative flex h-3 w-3">
                                     <span
@@ -191,8 +191,8 @@
     <script>
         // Audio Elements
         const welcomeAudio = document.getElementById('welcomeAudio');
-        const clickAudio   = document.getElementById('clickAudio');
-        const hoverAudio   = document.getElementById('hoverAudio');
+        const clickAudio = document.getElementById('clickAudio');
+        const hoverAudio = document.getElementById('hoverAudio');
 
         let soundEnabled = true;
         let welcomePlayed = false;
@@ -284,12 +284,16 @@
         // Unlock audio setelah user interaksi pertama kali (klik di mana saja)
         document.addEventListener('click', () => {
             unlockAudio();
-        }, { once: true });
+        }, {
+            once: true
+        });
 
         // Tambahan unlock untuk touch device
         document.addEventListener('touchstart', () => {
             unlockAudio();
-        }, { once: true });
+        }, {
+            once: true
+        });
 
         // Hover sound hanya ke elemen penting (lebih ringan)
         const hoverElements = document.querySelectorAll('button, a[href], .interactive-btn, [onclick*="playHoverSound"]');

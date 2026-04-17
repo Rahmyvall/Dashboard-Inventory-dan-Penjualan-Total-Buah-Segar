@@ -409,7 +409,7 @@
                             <div class="header-message-box ml-15 d-none d-md-flex">
                                 <button class="dropdown-toggle" type="button" id="message"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                    <svg width="10" height="10" viewBox="0 0 22 22" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M7.74866 5.97421C7.91444 5.96367 8.08162 5.95833 8.25005 5.95833C12.5532 5.95833 16.0417 9.4468 16.0417 13.75C16.0417 13.9184 16.0364 14.0856 16.0259 14.2514C16.3246 14.138 16.6127 14.003 16.8883 13.8482L19.2306 14.629C19.7858 14.8141 20.3141 14.2858 20.129 13.7306L19.3482 11.3882C19.8694 10.4604 20.1667 9.38996 20.1667 8.25C20.1667 4.70617 17.2939 1.83333 13.75 1.83333C11.0077 1.83333 8.66702 3.55376 7.74866 5.97421Z"
@@ -463,65 +463,84 @@
                                 </ul>
                             </div>
                             <!-- message end -->
-                            <!-- profile start -->
-                            <div class="profile-box ml-15">
-                                <button class="dropdown-toggle bg-transparent border-0" type="button" id="profile"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <div class="profile-info">
-                                        <div class="info">
-                                            <div class="image">
-                                                <img src="{{ asset('admin/assets/images/profile/profile-image.png') }}"
-                                                    alt="" />
-                                            </div>
-                                            <div>
-                                                <h6 class="fw-500">Adam Joe</h6>
-                                                <p>Admin</p>
-                                            </div>
-                                        </div>
+                            <!-- Profile Box -->
+                            <div class="profile-box ml-4 d-none d-md-flex">
+                                <!-- Profile Button dengan Lingkaran Avatar yang Lebih Bagus -->
+                                <button
+                                    class="flex items-center gap-x-3 px-3 py-2 rounded-3xl hover:bg-white/10 active:bg-white/5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-400/30 group"
+                                    type="button" id="profileDropdown" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+
+                                    <!-- Icon User Lingkaran yang lebih clean -->
+                                    <div
+                                        class="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 shadow-inner">
+                                        <i class="fa-solid fa-user text-white text-2xl"></i>
                                     </div>
+
+                                    <!-- Nama & Role -->
+                                    <div class="hidden lg:block text-left">
+                                        <p class="text-emerald-300 text-xs mt-0.5">
+                                            {{ ucfirst(auth()->user()->role ?? 'admin') }}
+                                        </p>
+                                    </div>
+
+                                    <i
+                                        class="fa-solid fa-chevron-down text-emerald-400 text-xs ml-2 transition-transform duration-200 group-hover:rotate-180"></i>
                                 </button>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
-                                    <li>
-                                        <div class="author-info flex items-center !p-1">
-                                            <div class="image">
+
+                                <!-- Dropdown Menu - Versi lebih modern -->
+                                <ul class="dropdown-menu dropdown-menu-end shadow-2xl border border-gray-100/80 bg-white rounded-3xl py-2 w-80 mt-2 overflow-hidden"
+                                    aria-labelledby="profileDropdown">
+
+                                    <!-- Header Dropdown dengan avatar besar -->
+                                    <li class="px-6 py-5 border-b border-gray-100">
+                                        <div class="flex flex-col items-center text-center">
+                                            <div
+                                                class="w-24 h-24 rounded-3xl overflow-hidden border-4 border-white shadow-xl mb-4 ring-1 ring-gray-100">
                                                 <img src="{{ asset('admin/assets/images/profile/profile-image.png') }}"
-                                                    alt="image">
+                                                    alt="Profile" class="w-full h-full object-cover">
                                             </div>
-                                            <div class="content">
-                                                <h4 class="text-sm">Adam Joe</h4>
-                                                <a class="text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white text-xs"
-                                                    href="#">Email@gmail.com</a>
-                                            </div>
+                                            <h4 class="font-semibold text-2xl text-gray-800 tracking-tight">
+                                                {{ auth()->user()->nama_lengkap ?? 'Administrator' }}
+                                            </h4>
+                                            <p class="text-gray-500 text-sm mt-1">
+                                                {{ ucfirst(auth()->user()->role ?? 'Admin') }}
+                                            </p>
                                         </div>
                                     </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="#0">
-                                            <i class="lni lni-user"></i> View Profile
+
+                                    <!-- Menu Items -->
+                                    <li class="py-1 px-2">
+                                        <a href="#0"
+                                            class="flex items-center gap-3.5 px-5 py-3.5 text-gray-700 hover:bg-gray-50 rounded-2xl transition-colors group">
+                                            <i
+                                                class="lni lni-user text-2xl w-7 text-gray-400 group-hover:text-emerald-500 transition-colors"></i>
+                                            <span class="font-medium">Profil Saya</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#0">
-                                            <i class="lni lni-alarm"></i> Notifications
+
+                                    <li class="py-1 px-2">
+                                        <a href="#0"
+                                            class="flex items-center gap-3.5 px-5 py-3.5 text-gray-700 hover:bg-gray-50 rounded-2xl transition-colors group">
+                                            <i
+                                                class="lni lni-cog text-2xl w-7 text-gray-400 group-hover:text-emerald-500 transition-colors"></i>
+                                            <span class="font-medium">Pengaturan</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#0"> <i class="lni lni-inbox"></i> Messages </a>
+                                    <!-- Logout - Benar & Aman -->
+                                    <li class="py-1 px-2">
+                                        <button onclick="logoutUser()"
+                                            class="flex w-full items-center gap-3.5 px-5 py-3.5 text-red-600 hover:bg-red-50 rounded-2xl transition-colors group">
+                                            <i
+                                                class="lni lni-exit text-2xl w-7 text-red-400 group-hover:text-red-500 transition-colors"></i>
+                                            <span class="font-medium">Keluar</span>
+                                        </button>
                                     </li>
-                                    <li>
-                                        <a href="#0"> <i class="lni lni-cog"></i> Settings </a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="#0"> <i class="lni lni-exit"></i> Sign Out </a>
-                                    </li>
-                                </ul>
+
                             </div>
-                            <!-- profile end -->
                         </div>
                     </div>
                 </div>
-            </div>
         </header>
         <!-- ========== header end ========== -->
 
@@ -631,6 +650,28 @@
             }
         };
     </script>
+    <script>
+        function logoutUser() {
+            if (!confirm('Apakah Anda yakin ingin keluar dari sistem?')) return;
+
+            fetch("{{ route('logout') }}", {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = "{{ route('welcome') }}";
+                    } else {
+                        alert('Gagal logout. Silakan coba lagi.');
+                    }
+                })
+                .catch(() => alert('Terjadi kesalahan.'));
+        }
+    </script>
+
 </body>
 
 </html>
