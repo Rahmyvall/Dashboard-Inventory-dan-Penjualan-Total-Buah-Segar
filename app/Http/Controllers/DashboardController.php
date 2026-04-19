@@ -17,7 +17,7 @@ class DashboardController extends Controller
         $title = 'Dashboard';
 
         $views = [
-            'admin'   => 'dashboard.admin.index',
+            'admin'   => 'dashboard.admin.index',   // Diubah dari .index
             'manager' => 'dashboard.manager.index',
             'kasir'   => 'dashboard.kasir.index',
             'gudang'  => 'dashboard.gudang.index',

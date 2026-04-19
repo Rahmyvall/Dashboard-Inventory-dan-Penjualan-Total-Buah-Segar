@@ -182,7 +182,7 @@
         <!-- ==================== TABEL PESANAN TERBARU ==================== -->
         <div class="row">
             <div class="col-12">
-                <div class="card border-0 shadow-xl rounded-3xl overflow-hidden bg-white dark:bg-gray-900">
+                <div class="card border-0  rounded-3xl overflow-hidden bg-white dark:bg-gray-900">
                     <div
                         class="card-header bg-white dark:bg-gray-900 border-0 pt-4 pb-3 px-5 d-flex justify-content-between align-items-center">
                         <h5 class="fw-semibold text-gray-700 dark:text-gray-200 mb-0">Pesanan Terbaru</h5>
