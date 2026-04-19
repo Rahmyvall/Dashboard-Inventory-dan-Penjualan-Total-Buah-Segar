@@ -147,29 +147,38 @@
                     <form action="{{ route('login.post') }}" method="POST" class="space-y-7">
                         @csrf
 
+                        <!-- ERROR MESSAGE -->
+                        @if ($errors->any())
+                            <div class="bg-red-500/20 text-red-300 p-3 rounded-lg text-sm">
+                                {{ $errors->first() }}
+                            </div>
+                        @endif
+
                         <!-- Username -->
-                        <div class="fade-in-up" style="animation-delay: 200ms">
+                        <div>
                             <label class="block text-sm font-medium text-emerald-100 mb-2">Username</label>
                             <div class="relative">
                                 <div class="absolute left-5 top-1/2 -translate-y-1/2 text-emerald-400">
                                     <i class="fa-solid fa-user"></i>
                                 </div>
+
                                 <input type="text" name="username" value="{{ old('username') }}"
                                     placeholder="Masukkan username"
-                                    class="input-focus w-full bg-white/10 border border-white/30 rounded-2xl py-4 pl-12 pr-5 text-white placeholder:text-emerald-200 focus:outline-none"
+                                    class="w-full bg-white/10 border border-white/30 rounded-2xl py-4 pl-12 pr-5 text-white placeholder:text-emerald-200 focus:outline-none"
                                     required autofocus />
                             </div>
                         </div>
 
                         <!-- Password -->
-                        <div class="fade-in-up" style="animation-delay: 350ms">
+                        <div>
                             <label class="block text-sm font-medium text-emerald-100 mb-2">Password</label>
                             <div class="relative">
                                 <div class="absolute left-5 top-1/2 -translate-y-1/2 text-emerald-400">
                                     <i class="fa-solid fa-lock"></i>
                                 </div>
+
                                 <input type="password" id="password" name="password" placeholder="••••••••"
-                                    class="input-focus w-full bg-white/10 border border-white/30 rounded-2xl py-4 pl-12 pr-12 text-white placeholder:text-emerald-200 focus:outline-none"
+                                    class="w-full bg-white/10 border border-white/30 rounded-2xl py-4 pl-12 pr-12 text-white placeholder:text-emerald-200 focus:outline-none"
                                     required />
 
                                 <button type="button" id="togglePassword"
@@ -181,7 +190,7 @@
 
                         <!-- Tombol Login -->
                         <button type="submit"
-                            class="btn-fruit w-full bg-emerald-500 hover:bg-emerald-600 py-4 rounded-2xl text-lg font-semibold shadow-xl mt-6 transition-all duration-300">
+                            class="w-full bg-emerald-500 hover:bg-emerald-600 py-4 rounded-2xl text-lg font-semibold shadow-xl mt-6 transition-all duration-300">
                             Masuk ke Dashboard
                         </button>
                     </form>

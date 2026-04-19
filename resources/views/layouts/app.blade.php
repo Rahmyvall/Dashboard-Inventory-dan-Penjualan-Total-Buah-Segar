@@ -1,128 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="{{ asset('admin/assets/images/logosaja.png') }}" type="image/x-icon" />
-    <title>Blank Page | PlainAdmin Demo</title>
-
-    <!-- ========== All CSS files linkup ========= -->
-    <link rel="stylesheet" href="{{ asset('admin/assets/css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('admin/assets/css/lineicons.css') }}" />
-    <link rel="stylesheet" href="{{ asset('adminassets/css/materialdesignicons.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('admin/assets/css/fullcalendar.css') }}" />
-    <link rel="stylesheet" href="{{ asset('admin/assets/css/main.css') }}" />
-    <style>
-        /* tombol */
-        .theme-toggle {
-            background: #f1f1f1;
-            border: none;
-            border-radius: 50%;
-            padding: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        /* icon */
-        .theme-toggle svg {
-            fill: #333;
-        }
-
-        /* hover */
-        .theme-toggle:hover {
-            transform: scale(1.1);
-        }
-
-        /* DARK MODE */
-        body.dark-mode {
-            background-color: #121212;
-            color: #ffffff;
-        }
-
-        body.dark-mode .theme-toggle {
-            background: #2a2a2a;
-        }
-
-        body.dark-mode .theme-toggle svg {
-            fill: #ffffff;
-        }
-
-        /* TITLE */
-        body.dark-mode .page-title,
-        body.dark-mode h1,
-        body.dark-mode .title {
-            color: #ffffff !important;
-        }
-
-        /* BREADCRUMB */
-        body.dark-mode .breadcrumb,
-        body.dark-mode .breadcrumb a,
-        body.dark-mode .breadcrumb span {
-            color: #cccccc !important;
-        }
-
-        /* ACTIVE breadcrumb (yang terakhir) */
-        body.dark-mode .breadcrumb .active {
-            color: #ffffff !important;
-        }
-
-        /* fallback universal (aman) */
-        body.dark-mode .page-header,
-        body.dark-mode .header-title {
-            color: #ffffff !important;
-        }
-
-        /* background header */
-        body.dark-mode .page-header,
-        body.dark-mode .header {
-            background-color: #1e1e1e !important;
-        }
-
-        /* TITLE NORMAL */
-        .main-title h2 {
-            color: #000;
-        }
-
-        /* DARK MODE */
-        body.dark-mode .main-title h2 {
-            color: #ffffff;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .nav-link:hover {
-            background-color: rgba(59, 130, 246, 0.1);
-            /* biru muda, sesuaikan dengan tema */
-        }
-
-        .icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        /* Animasi Hover Icon */
-        .icon-hover svg {
-            transition: all 0.3s ease;
-        }
-
-        .icon-hover:hover svg {
-            transform: scale(1.15) rotate(8deg);
-            color: #3b82f6;
-            /* warna biru saat hover */
-        }
-    </style>
-</head>
+@include('layouts.header')
 
 <body>
     <!-- ======== Preloader =========== -->
@@ -131,175 +7,7 @@
     </div>
     <!-- ======== Preloader =========== -->
 
-    <!-- ======== sidebar-nav start =========== -->
-    <aside class="sidebar-nav-wrapper">
-        <div class="navbar-logo">
-            <a href="index.html" style="display: flex; align-items: center; height: 60px;">
-                <img src="{{ asset('admin/assets/images/logo/logosaja.png') }}" alt="logo"
-                    style="width: 140px; height: auto; display: block;">
-            </a>
-        </div>
-        <nav class="sidebar-nav">
-            <ul>
-
-                <!-- Dashboard -->
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <span class="icon icon-hover">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.25">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1v-5m10-10l2 2m-2-2v10a1 1 0 01-1 1v-5m-6 0a1 1 0 001-1v5" />
-                            </svg>
-                        </span>
-                        <span class="text">Dashboard</span>
-                    </a>
-                </li>
-
-                <!-- Master Data -->
-                <li class="nav-item nav-item-has-children">
-                    <a href="#0" class="collapsed nav-link" data-bs-toggle="collapse"
-                        data-bs-target="#ddmenu_master" aria-controls="ddmenu_master" aria-expanded="false">
-                        <span class="icon icon-hover">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.25">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2" />
-                            </svg>
-                        </span>
-                        <span class="text">Master Data</span>
-                    </a>
-                    <ul id="ddmenu_master" class="collapse dropdown-nav">
-                        <li><a href="#">Kategori Buah</a></li>
-                        <li><a href="#">Produk / Buah</a></li>
-                        <li><a href="#">Supplier</a></li>
-                        <li><a href="#">Pelanggan</a></li>
-                        <li><a href="#">Pengguna & Karyawan</a></li>
-                    </ul>
-                </li>
-
-                <!-- Pembelian -->
-                <li class="nav-item nav-item-has-children">
-                    <a href="#0" class="collapsed nav-link" data-bs-toggle="collapse"
-                        data-bs-target="#ddmenu_pembelian" aria-controls="ddmenu_pembelian" aria-expanded="false">
-                        <span class="icon icon-hover">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.25">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                            </svg>
-                        </span>
-                        <span class="text">Pembelian</span>
-                    </a>
-                    <ul id="ddmenu_pembelian" class="collapse dropdown-nav">
-                        <li><a href="#">Daftar Pembelian</a></li>
-                        <li><a href="#">Tambah Pembelian Baru</a></li>
-                        <li><a href="#">Laporan Pembelian</a></li>
-                    </ul>
-                </li>
-
-                <!-- Penjualan -->
-                <li class="nav-item nav-item-has-children">
-                    <a href="#0" class="collapsed nav-link" data-bs-toggle="collapse"
-                        data-bs-target="#ddmenu_penjualan" aria-controls="ddmenu_penjualan" aria-expanded="false">
-                        <span class="icon icon-hover">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.25">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-1a2 2 0 01-2-2H9a2 2 0 01-2-2v-1a2 2 0 012-2m0 0V9a2 2 0 012-2" />
-                            </svg>
-                        </span>
-                        <span class="text">Penjualan</span>
-                    </a>
-                    <ul id="ddmenu_penjualan" class="collapse dropdown-nav">
-                        <li><a href="#">Daftar Penjualan</a></li>
-                        <li><a href="#">Transaksi Baru (Kasir)</a></li>
-                        <li><a href="#">Laporan Penjualan</a></li>
-                    </ul>
-                </li>
-
-                <!-- Stok & Inventory -->
-                <li class="nav-item nav-item-has-children">
-                    <a href="#0" class="collapsed nav-link" data-bs-toggle="collapse"
-                        data-bs-target="#ddmenu_stok" aria-controls="ddmenu_stok" aria-expanded="false">
-                        <span class="icon icon-hover">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.25">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M20 13V6a2 2 0 01-2-2H6a2 2 0 01-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-4a2 2 0 01-2-2v-1a2 2 0 012-2h4a2 2 0 012 2v1a2 2 0 01-2 2z" />
-                            </svg>
-                        </span>
-                        <span class="text">Stok & Inventory</span>
-                    </a>
-                    <ul id="ddmenu_stok" class="collapse dropdown-nav">
-                        <li><a href="#">Stok Saat Ini</a></li>
-                        <li><a href="#">Penyesuaian Stok (Opname)</a></li>
-                        <li><a href="#">Monitoring Expired</a></li>
-                    </ul>
-                </li>
-
-                <!-- Laporan -->
-                <li class="nav-item nav-item-has-children">
-                    <a href="#0" class="collapsed nav-link" data-bs-toggle="collapse"
-                        data-bs-target="#ddmenu_laporan" aria-controls="ddmenu_laporan" aria-expanded="false">
-                        <span class="icon icon-hover">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.25">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2" />
-                            </svg>
-                        </span>
-                        <span class="text">Laporan</span>
-                    </a>
-                    <ul id="ddmenu_laporan" class="collapse dropdown-nav">
-                        <li><a href="#">Laporan Penjualan</a></li>
-                        <li><a href="#">Laporan Pembelian</a></li>
-                        <li><a href="#">Laporan Stok</a></li>
-                        <li><a href="#">Laporan Keuangan</a></li>
-                    </ul>
-                </li>
-
-                <span class="divider">
-                    <hr />
-                </span>
-
-                <!-- Pengaturan -->
-                <li class="nav-item nav-item-has-children">
-                    <a href="#0" class="collapsed nav-link" data-bs-toggle="collapse"
-                        data-bs-target="#ddmenu_pengaturan" aria-controls="ddmenu_pengaturan" aria-expanded="false">
-                        <span class="icon icon-hover">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.25">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 002.573-1.066c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 00.817 1.194 1.724 1.724 0 01.817 1.194c-.94 1.543.827 3.31 2.37 2.37 1.756.426 1.756 2.924 0 3.35z" />
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                        </span>
-                        <span class="text">Pengaturan</span>
-                    </a>
-                    <ul id="ddmenu_pengaturan" class="collapse dropdown-nav">
-                        <li><a href="#">Pengaturan Umum</a></li>
-                        <li><a href="#">Profil Perusahaan</a></li>
-                    </ul>
-                </li>
-
-            </ul>
-        </nav>
-        <div class="promo-box">
-            <div class="promo-icon">
-                <img class="mx-auto" src="{{ asset('admin/assets/images/logo/logo-icon-big.svg') }}" alt="Logo">
-            </div>
-            <h3>Total Buah</h3>
-            <p>Total buah adalah jumlah keseluruhan buah yang dihitung atau dimiliki.</p>
-            <a href="https://plainadmin.com/pro" target="_blank" rel="nofollow"
-                class="main-btn primary-btn btn-hover">
-                Total Buah
-            </a>
-        </div>
-    </aside>
-    <div class="overlay"></div>
-    <!-- ======== sidebar-nav end =========== -->
+    @include('layouts.sidebar')
 
     <!-- ======== main-wrapper start =========== -->
     <main class="main-wrapper">
@@ -309,16 +17,44 @@
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-6">
                         <div class="header-left d-flex align-items-center">
-                            <div class="menu-toggle-btn mr-15">
-                                <button id="menu-toggle" class="main-btn primary-btn btn-hover">
-                                    <i class="lni lni-chevron-left me-2"></i> Menu
-                                </button>
-                            </div>
-                            <div class="header-search d-none d-md-flex">
-                                <form action="#">
-                                    <input type="text" placeholder="Search..." />
-                                    <button><i class="lni lni-search-alt"></i></button>
-                                </form>
+                            <!-- ==================== HEADER RIGHT SECTION ==================== -->
+                            <div class="d-flex align-items-center gap-3">
+
+                                <!-- Menu Toggle Button - Modern Style -->
+                                <div class="menu-toggle-btn">
+                                    <button id="menu-toggle"
+                                        class="btn btn-primary d-flex align-items-center gap-2 px-4 py-2 rounded-3 shadow-sm border-0">
+                                        <i class="lni lni-menu me-1"></i>
+                                        <span class="fw-medium">Menu</span>
+                                    </button>
+                                </div>
+
+                                <!-- Modern Search Bar -->
+                                <!-- Modern Search Bar dengan Live Search -->
+                                <div class="header-search flex-grow-1" style="max-width: 460px;">
+                                    <div class="position-relative">
+
+                                        <input type="text" id="globalSearch"
+                                            class="form-control border-0 py-3 ps-5 pe-4 rounded-4 shadow-sm"
+                                            placeholder="Cari produk, order, pelanggan, atau laporan..."
+                                            style="background: rgba(255, 255, 255, 0.95);
+                      backdrop-filter: blur(12px);
+                      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);">
+
+                                        <!-- Icon Search -->
+                                        <span
+                                            class="position-absolute top-50 start-0 translate-middle-y ps-4 text-muted">
+                                            <i class="lni lni-search-alt fs-5"></i>
+                                        </span>
+
+                                        <!-- Dropdown Hasil Pencarian -->
+                                        <div id="searchResults"
+                                            class="position-absolute w-100 mt-2 bg-white rounded-4 shadow-lg overflow-hidden d-none"
+                                            style="z-index: 1050; max-height: 380px; overflow-y: auto;">
+                                            <!-- Hasil akan ditampilkan via JavaScript -->
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -328,15 +64,15 @@
                                 <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">
 
                                     <!-- ICON MOON -->
-                                    <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg" width="20"
-                                        height="20" viewBox="0 0 24 24">
+                                    <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        viewBox="0 0 24 24">
                                         <path
                                             d="M21 12.79A9 9 0 0111.21 3c0 .34.02.67.05 1A7 7 0 1019 19c.33.03.66.05 1 .05a9 9 0 011-6.26z" />
                                     </svg>
 
                                     <!-- ICON SUN -->
-                                    <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" width="20"
-                                        height="20" viewBox="0 0 24 24" style="display: none;">
+                                    <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        viewBox="0 0 24 24" style="display: none;">
                                         <path
                                             d="M12 4.5V2M12 22v-2.5M4.5 12H2M22 12h-2.5M5.64 5.64L4.22 4.22M19.78 19.78l-1.42-1.42M5.64 18.36l-1.42 1.42M19.78 4.22l-1.42 1.42M12 7a5 5 0 100 10 5 5 0 000-10z" />
                                     </svg>
@@ -407,8 +143,8 @@
                             <!-- notification end -->
                             <!-- message start -->
                             <div class="header-message-box ml-15 d-none d-md-flex">
-                                <button class="dropdown-toggle" type="button" id="message"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="dropdown-toggle" type="button" id="message" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
                                     <svg width="10" height="10" viewBox="0 0 22 22" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -547,131 +283,15 @@
         <!-- ========== section start ========== -->
         <section class="section">
             <div class="container-fluid">
-                <!-- ========== title-wrapper start ========== -->
-                <div class="title-wrapper pt-30">
-                    <div class="row align-items-center">
-                        <div class="col-md-6">
-                            <div class="main-title">
-                                @yield('content')
-                            </div>
-                        </div>
-                        <!-- end col -->
-                        <div class="col-md-6">
-                            <div class="breadcrumb-wrapper">
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item">
-                                            <a href="#0">Dashboard</a>
-                                        </li>
-                                        <li class="breadcrumb-item active" aria-current="page">
-                                            Page
-                                        </li>
-                                    </ol>
-                                </nav>
-                            </div>
-                        </div>
-                        <!-- end col -->
+                <!-- ==================== ISI DASHBOARD (Full Width) ==================== -->
+                <div class="row">
+                    <div class="col-12">
+                        @yield('content')
                     </div>
-                    <!-- end row -->
                 </div>
-                <!-- ========== title-wrapper end ========== -->
+
             </div>
-            <!-- end container -->
         </section>
         <!-- ========== section end ========== -->
-
-        <!-- ========== footer start =========== -->
-        <footer class="footer">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6 order-last order-md-first">
-                        <div class="copyright text-center text-md-start">
-                            <p class="text-sm">
-                                © {{ date('Y') }}
-                                <strong>{{ config('app.name', 'Sistem Manajemen Buah') }}</strong> •
-                                All Rights Reserved.
-                            </p>
-                        </div>
-                    </div>
-                    <!-- end col-->
-                    <div class="col-md-6">
-                        <div class="terms d-flex justify-content-center justify-content-md-end">
-                            <a href="#0" class="text-sm">Term & Conditions</a>
-                            <a href="#0" class="text-sm ml-15">Privacy & Policy</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- end row -->
-            </div>
-            <!-- end container -->
-        </footer>
-        <!-- ========== footer end =========== -->
-    </main>
-    <!-- ======== main-wrapper end =========== -->
-
-    <!-- ========= All Javascript files linkup ======== -->
-    <script src="{{ asset('admin/assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/Chart.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/dynamic-pie-chart.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/moment.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/fullcalendar.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/jvectormap.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/world-merc.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/polyfill.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/main.js') }}"></script>
-    <script>
-        function toggleTheme() {
-            const body = document.body;
-            const moon = document.getElementById("iconMoon");
-            const sun = document.getElementById("iconSun");
-
-            body.classList.toggle("dark-mode");
-
-            if (body.classList.contains("dark-mode")) {
-                moon.style.display = "none";
-                sun.style.display = "block";
-                localStorage.setItem("theme", "dark");
-            } else {
-                moon.style.display = "block";
-                sun.style.display = "none";
-                localStorage.setItem("theme", "light");
-            }
-        }
-
-        // load saat pertama buka
-        window.onload = function() {
-            const moon = document.getElementById("iconMoon");
-            const sun = document.getElementById("iconSun");
-
-            if (localStorage.getItem("theme") === "dark") {
-                document.body.classList.add("dark-mode");
-                moon.style.display = "none";
-                sun.style.display = "block";
-            }
-        };
-    </script>
-    <script>
-        function logoutUser() {
-            if (!confirm('Apakah Anda yakin ingin keluar dari sistem?')) return;
-
-            fetch("{{ route('logout') }}", {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'Accept': 'application/json'
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        window.location.href = "{{ route('welcome') }}";
-                    } else {
-                        alert('Gagal logout. Silakan coba lagi.');
-                    }
-                })
-                .catch(() => alert('Terjadi kesalahan.'));
-        }
-    </script>
-
-</body>
-
-</html>
+        @stack('scripts')
+        @include('layouts.footer')

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
           $table->id('id_user');                    // AUTO_INCREMENT PRIMARY KEY
             $table->string('username', 50)->unique()->notNullable();
-            $table->string('password_hash', 255)->notNullable();
+           $table->string('password'); // ✅ BENAR
             $table->string('nama_lengkap', 100)->notNullable();
             $table->enum('role', ['admin', 'manager', 'kasir', 'gudang'])->notNullable();
             $table->boolean('is_active')->default(true);

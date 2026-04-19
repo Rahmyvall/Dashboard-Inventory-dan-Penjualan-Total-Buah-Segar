@@ -4,57 +4,54 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
-use App\Models\User;   // Jika kamu pakai model User default
 
 class AuthController extends Controller
 {
-    /**
-     * Tampilkan halaman Login
-     */
-    public function login(): View
+    public function login()
     {
-        return view('auth.login');   // pastikan file blade ada di resources/views/auth/login.blade.php
+        return view('auth.login');
     }
 
-    /**
-     * Proses Login (Authenticate)
-     */
-  public function authenticate(Request $request)
-{
-    $request->validate([
-        'username' => 'required|string',
-        'password' => 'required',
-    ]);
+    public function authenticate(Request $request)
+    {
+        // ✅ Validasi
+        $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
+        ]);
 
-    $credentials = $request->only('username', 'password');
+        // 🔥 Debug sementara (hapus nanti)
+        // dd($request->username, $request->password);
 
-    if (Auth::attempt($credentials, $request->boolean('remember'))) {
-        $request->session()->regenerate();
+        // 🔐 Proses login
+        if (Auth::attempt([
+            'username' => $request->username,
+            'password' => $request->password,
+            'is_active' => 1
+        ])) {
 
-        // Redirect ke dashboard (atau halaman yang dituju sebelumnya)
-        return redirect()->intended(route('dashboard'))
-                         ->with('success', 'Login berhasil! Selamat datang.');
+            // regenerate session
+            $request->session()->regenerate();
+
+            // 🔥 Debug login berhasil
+            // dd(Auth::user());
+
+            return redirect()->route('dashboard');
+        }
+
+        // ❌ Jika gagal
+        return back()->withErrors([
+            'username' => 'Username atau password salah'
+        ])->withInput();
     }
 
-    // Jika gagal
-    return back()
-        ->withErrors(['username' => 'Username atau password salah.'])
-        ->withInput($request->only('username'));
-}
+    public function logout(Request $request)
+    {
+        Auth::logout();
 
-    /**
-     * Proses Logout
-     */
-   public function logout(Request $request)
-{
-    Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
-
-    return redirect()->route('welcome');
-}
+        return redirect('/');
+    }
 }

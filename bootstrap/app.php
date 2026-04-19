@@ -12,12 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         
-        // Redirect otomatis (opsional tapi sangat membantu)
-        $middleware->redirectGuestsTo('/login');     // Tamu → halaman login
-        // $middleware->redirectUsersTo('/dashboard'); // User login → dashboard
-
-        // Jika ingin menambahkan middleware global lain (contoh):
-        // $middleware->append(\App\Http\Middleware\LogRequest::class);
+       // Daftarkan RoleMiddleware
+        $middleware->alias([
+            'role' => \App\Http\Middleware\RoleMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

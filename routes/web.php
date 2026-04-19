@@ -5,12 +5,19 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-// ==================== WELCOME (Root) ====================
+/*
+|--------------------------------------------------------------------------
+| Web Routes - Total Buah Segar
+|--------------------------------------------------------------------------
+*/
+
+// ==================== WELCOME ====================
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-// ==================== AUTH ROUTES ====================
+// ==================== AUTHENTICATION ====================
+
 Route::get('/login', [AuthController::class, 'login'])
     ->middleware('guest')
     ->name('login');
@@ -19,18 +26,41 @@ Route::post('/login', [AuthController::class, 'authenticate'])
     ->middleware('guest')
     ->name('login.post');
 
-// ROUTE LOGOUT ←←← PASTIKAN INI ADA
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
 
 // ==================== DASHBOARD ====================
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware('auth')
-    ->name('dashboard');
 
-// ==================== USERS ====================
 Route::middleware('auth')->group(function () {
-    Route::resource('users', UserController::class)
-        ->except(['show']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
 });
+
+// ==================== ROLE-BASED ROUTES ====================
+
+// === ADMIN ONLY ===
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::resource('users', UserController::class)->except(['show']);
+
+    // Tambahkan route admin di sini nanti
+});
+
+// === MANAGER ONLY ===
+Route::middleware(['auth', 'role:manager'])->group(function () {
+    // Tambahkan route manager di sini nanti
+});
+
+// === KASIR ONLY ===
+Route::middleware(['auth', 'role:kasir'])->group(function () {
+    // Tambahkan route kasir di sini nanti
+});
+
+// === GUDANG ONLY ===
+Route::middleware(['auth', 'role:gudang'])->group(function () {
+    // Tambahkan route gudang di sini nanti
+});
+
+// ==================== ROUTES UNTUK BEBERAPA ROLE ====================
+
+// Tambahkan route yang bisa diakses oleh lebih dari satu role di sini nanti

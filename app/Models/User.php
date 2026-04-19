@@ -13,33 +13,29 @@ class User extends Authenticatable
     protected $table = 'users';
     protected $primaryKey = 'id_user';
 
-    // ★★★ TAMBAHKAN BARIS INI ★★★
-    public $timestamps = false;
+    // ❌ HAPUS kalau kamu pakai timestamps di database
+    public $timestamps = true;
 
     protected $fillable = [
         'username',
-        'password_hash',
+        'password',
         'nama_lengkap',
         'role',
         'is_active',
     ];
 
     protected $hidden = [
-        'password_hash',
-        // 'remember_token',   // uncomment jika kamu butuh fitur remember me
+        'password',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'is_active'  => 'boolean',
-            'created_at' => 'datetime',
-        ];
-    }
+    protected $casts = [
+        'is_active'  => 'boolean',
+        'created_at' => 'datetime',
+    ];
 
-    // Wajib untuk Login
+    // 🔥 PENTING: pakai password (bukan password_hash)
     public function getAuthPassword()
     {
-        return $this->password_hash;
+        return $this->password;
     }
 }
