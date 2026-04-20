@@ -285,12 +285,11 @@
             <div class="container-fluid">
                 <!-- ==================== ISI DASHBOARD (Full Width) ==================== -->
                 <div class="row">
-                    <div class="col-12">
+                    <div class="container">
                         @yield('content')
-                    </div>
-                </div>
+                    </div </div>
 
-            </div>
+                </div>
         </section>
         <!-- ========== section end ========== -->
         @stack('scripts')

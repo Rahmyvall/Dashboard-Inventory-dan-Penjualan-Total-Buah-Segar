@@ -155,13 +155,35 @@
 
             <!-- Chart 3 -->
             <div class="col-lg-6">
-                <div class="card border-0 shadow-xl rounded-3xl overflow-hidden h-100 bg-white dark:bg-gray-900">
-                    <div class="card-header bg-white dark:bg-gray-900 border-0 pt-4 pb-0 px-5">
-                        <h5 class="fw-semibold text-gray-700 dark:text-gray-200">Komposisi Penjualan per Kategori</h5>
+                <div class="card border-0 shadow-lg rounded-4 h-100">
+
+                    <!-- Header -->
+                    <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center px-4 py-3">
+                        <div>
+                            <h6 class="fw-semibold mb-1">Komposisi Kategori</h6>
+                            <small class="text-muted">Distribusi berdasarkan data kategori</small>
+                        </div>
+
+                        <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2">
+                            📊 Chart
+                        </span>
                     </div>
-                    <div class="p-5 flex-grow-1 d-flex align-items-center">
-                        <canvas id="Chart3" style="width: 100%; height: 340px;"></canvas>
+
+                    <!-- Body -->
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+
+                        <!-- Chart -->
+                        <div style="width: 100%; max-width: 320px;">
+                            <canvas id="Chart3"></canvas>
+                        </div>
+
+                        <!-- Info kecil -->
+                        <small class="text-muted mt-3">
+                            Klik chart untuk melihat detail kategori
+                        </small>
+
                     </div>
+
                 </div>
             </div>
 
@@ -175,6 +197,7 @@
                         <canvas id="Chart4" style="width: 100%; height: 360px;"></canvas>
                     </div>
                 </div>
+
             </div>
 
         </div>
@@ -329,27 +352,28 @@
             new Chart(document.getElementById('Chart3'), {
                 type: 'doughnut',
                 data: {
-                    labels: ['Strawberry', 'Jeruk', 'Mangga', 'Semangka', 'Pisang', 'Lainnya'],
+                    labels: chartLabels, // 🔥 dari database kategori
                     datasets: [{
-                        data: [35, 24, 19, 11, 7, 4],
-                        backgroundColor: ['#10b981', '#f59e0b', '#22c55e', '#ec4899', '#eab308',
-                            '#64748b'
-                        ],
-                        borderWidth: 6,
-                        borderColor: isDark ? '#1f2937' : '#ffffff'
+                        data: chartData, // 🔥 dari database kategori
+                        backgroundColor: chartLabels.map((_, i) =>
+                            `hsl(${i * 60}, 70%, 55%)`
+                        ),
+                        borderWidth: 4,
+                        borderColor: '#ffffff',
+                        hoverOffset: 8
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    cutout: '68%',
+                    cutout: '65%',
+
                     plugins: {
                         legend: {
                             position: 'bottom',
                             labels: {
-                                padding: 18,
-                                usePointStyle: true,
-                                color: isDark ? '#e5e7eb' : '#374151'
+                                padding: 15,
+                                usePointStyle: true
                             }
                         }
                     }
@@ -407,5 +431,9 @@
             });
 
         });
+    </script>
+    <script>
+        const chartLabels = @json($labels);
+        const chartData = @json($data);
     </script>
 @endpush

@@ -40,11 +40,31 @@
                          <span class="text">Master Data</span>
                      </a>
                      <ul id="ddmenu_master" class="collapse dropdown-nav">
-                         <li><a href="#">Kategori Buah</a></li>
-                         <li><a href="#">Produk / Buah</a></li>
-                         <li><a href="#">Supplier</a></li>
-                         <li><a href="#">Pelanggan</a></li>
-                         <li><a href="#">Pengguna & Karyawan</a></li>
+                         <li>
+                             <a href="{{ route('kategori.index') }}">
+                                 <i class="fas fa-tags"></i> Kategori Buah
+                             </a>
+                         </li>
+                         <li>
+                             <a href="#">
+                                 <i class="fas fa-apple-alt"></i> Produk / Buah
+                             </a>
+                         </li>
+                         <li>
+                             <a href="#">
+                                 <i class="fas fa-truck"></i> Supplier
+                             </a>
+                         </li>
+                         <li>
+                             <a href="#">
+                                 <i class="fas fa-users"></i> Pelanggan
+                             </a>
+                         </li>
+                         <li>
+                             <a href="{{ route('users.index') }}">
+                                 <i class="fas fa-user-cog"></i> Pengguna & Karyawan
+                             </a>
+                         </li>
                      </ul>
                  </li>
 

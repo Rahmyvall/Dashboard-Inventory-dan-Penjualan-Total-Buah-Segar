@@ -12,16 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-          $table->id('id_user');                    // AUTO_INCREMENT PRIMARY KEY
-            $table->string('username', 50)->unique()->notNullable();
-           $table->string('password'); // ✅ BENAR
-            $table->string('nama_lengkap', 100)->notNullable();
-            $table->enum('role', ['admin', 'manager', 'kasir', 'gudang'])->notNullable();
-            $table->boolean('is_active')->default(true);
-            $table->timestamp('created_at')->useCurrent();
-            $table->rememberToken();
-        });
+    $table->id('id_user');
 
+    $table->string('username', 50)->unique();
+    $table->string('password');
+    $table->string('nama_lengkap', 100);
+    $table->enum('role', ['admin', 'manager', 'kasir', 'gudang']);
+    $table->boolean('is_active')->default(true);
+
+    // Tambahkan ini:
+    $table->timestamp('created_at')->useCurrent();
+    $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();  // atau tanpa nullable
+
+    $table->rememberToken();
+});
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');

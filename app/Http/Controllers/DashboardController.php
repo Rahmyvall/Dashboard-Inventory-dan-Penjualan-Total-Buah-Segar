@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use App\Models\Kategori;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -16,8 +18,18 @@ class DashboardController extends Controller
 
         $title = 'Dashboard';
 
+        // 🔥 Ambil data kategori untuk chart
+        $kategoris = Kategori::select('nama_kategori')
+            ->selectRaw('COUNT(*) as total')
+            ->groupBy('nama_kategori')
+            ->get();
+
+        // Format untuk Chart.js
+        $labels = $kategoris->pluck('nama_kategori');
+        $data   = $kategoris->pluck('total');
+
         $views = [
-            'admin'   => 'dashboard.admin.index',   // Diubah dari .index
+            'admin'   => 'dashboard.admin.index',
             'manager' => 'dashboard.manager.index',
             'kasir'   => 'dashboard.kasir.index',
             'gudang'  => 'dashboard.gudang.index',
@@ -27,6 +39,11 @@ class DashboardController extends Controller
             abort(403, 'Role tidak dikenali');
         }
 
-        return view($views[$user->role], compact('title', 'user'));
+        return view($views[$user->role], compact(
+            'title',
+            'user',
+            'labels',
+            'data'
+        ));
     }
 }

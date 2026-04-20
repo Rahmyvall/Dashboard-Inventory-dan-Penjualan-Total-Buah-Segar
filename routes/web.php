@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\KategoriController;   // ← Tambahkan ini
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,7 +44,18 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('users', UserController::class)->except(['show']);
 
-    // Tambahkan route admin di sini nanti
+    // ==================== KATEGORI (Admin Only) ====================
+    Route::resource('kategori', KategoriController::class);
+
+    // Jika ingin route manual (lebih fleksibel):
+    // Route::prefix('kategori')->name('kategori.')->group(function () {
+    //     Route::get('/', [KategoriController::class, 'index'])->name('index');
+    //     Route::get('/create', [KategoriController::class, 'create'])->name('create');
+    //     Route::post('/', [KategoriController::class, 'store'])->name('store');
+    //     Route::get('/{kategori}/edit', [KategoriController::class, 'edit'])->name('edit');
+    //     Route::put('/{kategori}', [KategoriController::class, 'update'])->name('update');
+    //     Route::delete('/{kategori}', [KategoriController::class, 'destroy'])->name('destroy');
+    // });
 });
 
 // === MANAGER ONLY ===
