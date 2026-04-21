@@ -46,7 +46,7 @@
                              </a>
                          </li>
                          <li>
-                             <a href="#">
+                             <a href="{{ route('produk.index') }}">
                                  <i class="fas fa-apple-alt"></i> Produk / Buah
                              </a>
                          </li>
