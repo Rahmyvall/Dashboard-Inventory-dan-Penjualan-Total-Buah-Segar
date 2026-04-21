@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KategoriController;   // ← Tambahkan ini
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,6 +49,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // ==================== KATEGORI (Admin Only) ====================
     Route::resource('kategori', KategoriController::class);
     Route::resource('produk', ProdukController::class);
+    Route::resource('supplier', SupplierController::class);
+   Route::get('/supplier/export-excel', [SupplierController::class, 'exportExcel'])
+    ->name('supplier.excel');
+
+Route::get('/supplier/export-pdf', [SupplierController::class, 'exportPdf'])
+    ->name('supplier.pdf');
 });
 
 // === MANAGER ONLY ===

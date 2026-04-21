@@ -38,7 +38,7 @@
                     <div class="card border-0 shadow-sm rounded-4 product-card position-relative overflow-hidden">
 
                         <!-- BADGE DISKON -->
-                        <div class="position-absolute top-0 start-0 m-2">
+                        <div class="position-absolute top-0 inset-s-0 m-2">
                             <span class="badge bg-danger px-3 py-2 shadow-sm">
                                 -{{ $diskon }}%
                             </span>

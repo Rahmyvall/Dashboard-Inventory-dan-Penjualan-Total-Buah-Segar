@@ -8,7 +8,7 @@
         <!-- ==================== HEADER ==================== -->
         <div class="d-flex justify-content-between align-items-center mb-5">
             <div class="d-flex align-items-center gap-4">
-                <div class="bg-gradient-to-br from-emerald-500 to-green-600 p-4 rounded-3xl text-white shadow-xl"
+                <div class="bg-linear-to-br from-emerald-500 to-green-600 p-4 rounded-3xl text-white shadow-xl"
                     style="font-size: 2.2rem;">
                     🍓
                 </div>
@@ -47,7 +47,7 @@
                                 🛍️</div>
                         </div>
                     </div>
-                    <div class="h-1.5 bg-gradient-to-r from-emerald-400 to-green-500"></div>
+                    <div class="h-1.5 bg-linear-to-r from-emerald-400 to-green-500"></div>
                 </div>
             </div>
 
@@ -70,7 +70,7 @@
                                 💰</div>
                         </div>
                     </div>
-                    <div class="h-1.5 bg-gradient-to-r from-emerald-500 to-teal-500"></div>
+                    <div class="h-1.5 bg-linear-to-r from-emerald-500 to-teal-500"></div>
                 </div>
             </div>
 
@@ -93,7 +93,7 @@
                                 📦</div>
                         </div>
                     </div>
-                    <div class="h-1.5 bg-gradient-to-r from-amber-400 to-orange-500"></div>
+                    <div class="h-1.5 bg-linear-to-r from-amber-400 to-orange-500"></div>
                 </div>
             </div>
 
@@ -112,7 +112,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="h-1.5 bg-gradient-to-r from-red-400 to-rose-500"></div>
+                    <div class="h-1.5 bg-linear-to-r from-red-400 to-rose-500"></div>
                 </div>
             </div>
         </div>
@@ -135,7 +135,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="p-4 flex-grow-1">
+                    <div class="p-4 grow">
                         <canvas id="Chart1" style="width: 100%; height: 360px;"></canvas>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
                     <div class="card-header bg-white dark:bg-gray-900 border-0 pt-4 pb-0 px-5">
                         <h5 class="fw-semibold text-gray-700 dark:text-gray-200">Penjualan Bulanan</h5>
                     </div>
-                    <div class="p-4 flex-grow-1">
+                    <div class="p-4 grow">
                         <canvas id="Chart2" style="width: 100%; height: 360px;"></canvas>
                     </div>
                 </div>
