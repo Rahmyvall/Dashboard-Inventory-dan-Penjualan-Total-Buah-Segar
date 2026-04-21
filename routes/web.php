@@ -3,24 +3,23 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\KategoriController;   // ← Tambahkan ini
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes - Total Buah Segar
+| WEB ROUTES - TOTAL BUAH SEGAR
 |--------------------------------------------------------------------------
 */
 
-// ==================== WELCOME ====================
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+// ==================== HOME ====================
+Route::get('/', [FrontendController::class, 'index'])->name('welcome');
 
-// ==================== AUTHENTICATION ====================
 
+// ==================== AUTH ====================
 Route::get('/login', [AuthController::class, 'login'])
     ->middleware('guest')
     ->name('login');
@@ -33,45 +32,56 @@ Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
 
-// ==================== DASHBOARD ====================
 
+// ==================== DASHBOARD ====================
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 });
 
-// ==================== ROLE-BASED ROUTES ====================
 
-// === ADMIN ONLY ===
+// ==================== FRONTEND MARKETPLACE ====================
+
+Route::prefix('suppliers')->name('suppliers.')->group(function () {
+
+    // LIST SUPPLIER (PUBLIC)
+    Route::get('/', [FrontendController::class, 'supplier'])
+        ->name('index');
+
+    // DETAIL PRODUK PER SUPPLIER
+    Route::get('/{id}/products', [FrontendController::class, 'supplierProduk'])
+        ->name('products');
+});
+
+
+// ==================== ADMIN ONLY ====================
 Route::middleware(['auth', 'role:admin'])->group(function () {
+
     Route::resource('users', UserController::class)->except(['show']);
 
-    // ==================== KATEGORI (Admin Only) ====================
     Route::resource('kategori', KategoriController::class);
     Route::resource('produk', ProdukController::class);
+
+    // ADMIN SUPPLIER CRUD (tetap pakai supplier)
     Route::resource('supplier', SupplierController::class);
-   Route::get('/supplier/export-excel', [SupplierController::class, 'exportExcel'])
-    ->name('supplier.excel');
 
-Route::get('/supplier/export-pdf', [SupplierController::class, 'exportPdf'])
-    ->name('supplier.pdf');
+    Route::get('/supplier/export-excel', [SupplierController::class, 'exportExcel'])
+        ->name('supplier.excel');
+
+    Route::get('/supplier/export-pdf', [SupplierController::class, 'exportPdf'])
+        ->name('supplier.pdf');
 });
 
-// === MANAGER ONLY ===
+
+// ==================== ROLE LAIN ====================
 Route::middleware(['auth', 'role:manager'])->group(function () {
-    // Tambahkan route manager di sini nanti
+    // manager routes
 });
 
-// === KASIR ONLY ===
 Route::middleware(['auth', 'role:kasir'])->group(function () {
-    // Tambahkan route kasir di sini nanti
+    // kasir routes
 });
 
-// === GUDANG ONLY ===
 Route::middleware(['auth', 'role:gudang'])->group(function () {
-    // Tambahkan route gudang di sini nanti
+    // gudang routes
 });
-
-// ==================== ROUTES UNTUK BEBERAPA ROLE ====================
-
-// Tambahkan route yang bisa diakses oleh lebih dari satu role di sini nanti

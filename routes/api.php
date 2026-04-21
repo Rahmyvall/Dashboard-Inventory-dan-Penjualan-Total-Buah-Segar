@@ -19,28 +19,28 @@ Route::prefix('produk')->group(function () {
     Route::get('/', [ProdukApiController::class, 'index']);
     Route::get('/{id}', [ProdukApiController::class, 'show']);
     Route::post('/', [ProdukApiController::class, 'store']);
-    Route::post('/{id}', [ProdukApiController::class, 'update']); // upload gambar
+    Route::post('/{id}', [ProdukApiController::class, 'update']);
     Route::delete('/{id}', [ProdukApiController::class, 'destroy']);
 });
 
 
 // =======================
-// SUPPLIER API (NEW)
+// SUPPLIER API
 // =======================
 Route::prefix('supplier')->group(function () {
 
-    // GET semua supplier
+    // 🔥 GET + SEARCH + FILTER
     Route::get('/', [SupplierApiController::class, 'index']);
 
-    // GET detail supplier
+    // DETAIL
     Route::get('/{id}', [SupplierApiController::class, 'show']);
 
-    // CREATE supplier
+    // CREATE
     Route::post('/', [SupplierApiController::class, 'store']);
 
-    // UPDATE supplier (support upload foto)
+    // UPDATE (upload foto)
     Route::post('/{id}', [SupplierApiController::class, 'update']);
 
-    // DELETE supplier
+    // DELETE
     Route::delete('/{id}', [SupplierApiController::class, 'destroy']);
 });

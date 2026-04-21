@@ -98,7 +98,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="min-h-screen flex items-center pt-24">
+    <section class="min-h-screen flex items-center pt-20">
         <div class="max-w-screen-2xl mx-auto px-8 grid lg:grid-cols-2 gap-16 items-center">
 
             <!-- Left Side -->
@@ -174,7 +174,105 @@
             </div>
         </div>
     </section>
+    <!-- GLOBAL PARTNER NETWORK -->
+    <div class="relative">
 
+        <!-- HEADER PREMIUM CENTERED -->
+        <div class="text-center mb-12 space-y-4">
+
+            <!-- BADGE -->
+            <div
+                class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full
+        bg-white/70 backdrop-blur-md border border-gray-200
+        shadow-sm text-xs text-gray-600 mx-auto">
+                <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                Live • {{ $suppliers->count() }} Verified Partners
+            </div>
+
+            <!-- TITLE (PREMIUM COLOR GRADIENT) -->
+            <h2
+                class="text-4xl md:text-6xl font-semibold tracking-tight
+    bg-linear-to-r bg-emerald-500 via-blue-400 to-white
+    bg-clip-text text-transparent drop-shadow-sm">
+                Partner Network
+            </h2>
+
+            <!-- DESCRIPTION (SOFT PREMIUM TEXT) -->
+            <p class="from-lime-400 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed">
+                Kami menghadirkan jaringan supplier terpercaya yang menyalurkan produk segar premium langsung dari
+                petani dan mitra terverifikasi untuk memastikan kualitas terbaik.
+            </p>
+
+        </div>
+
+        <!-- CAROUSEL WRAPPER -->
+        <div class="relative">
+
+            <!-- TRACK -->
+            <div id="supplierCarousel" class="flex gap-6 overflow-x-auto px-6 py-6 select-none">
+
+                @foreach ($suppliers as $supplier)
+                    <div
+                        class="min-w-[260px] bg-white rounded-3xl border border-gray-100
+                    shadow-sm hover:shadow-xl transition-all duration-500
+                    hover:-translate-y-2 group">
+
+                        <!-- IMAGE -->
+                        <div class="relative flex justify-center pt-6">
+
+                            <div class="relative">
+                                <img src="{{ $supplier->foto
+                                    ? asset('storage/' . $supplier->foto)
+                                    : 'https://ui-avatars.com/api/?name=' . urlencode($supplier->nama_supplier ?? 'Supplier') }}"
+                                    class="w-24 h-24 rounded-full object-cover ring-4 ring-white shadow-md group-hover:scale-105 transition">
+
+                                <span
+                                    class="absolute bottom-1 right-1 w-3 h-3 bg-green-500 rounded-full ring-2 ring-white animate-pulse"></span>
+                            </div>
+
+                        </div>
+
+                        <!-- CONTENT -->
+                        <div class="px-5 pb-6 text-center">
+
+                            <h3 class="mt-4 font-semibold text-gray-900 text-base truncate">
+                                {{ $supplier->nama_supplier ?? '-' }}
+                            </h3>
+
+                            <p class="text-gray-500 text-xs mt-1">
+                                📍 {{ $supplier->kota ?? '-' }}
+                            </p>
+
+                            <p class="text-gray-400 text-[11px] mt-1 truncate">
+                                {{ $supplier->email ?? '-' }}
+                            </p>
+
+                            <div class="mt-3">
+                                <span
+                                    class="text-[10px] px-3 py-1 rounded-full font-medium
+                                {{ ($supplier->status ?? '') == 'aktif'
+                                    ? 'bg-green-50 text-green-600 border border-green-100'
+                                    : 'bg-red-50 text-red-500 border border-red-100' }}">
+                                    {{ strtoupper($supplier->status ?? 'ACTIVE') }}
+                                </span>
+                            </div>
+
+                            @if (!empty($supplier->id))
+                                <a href="{{ route('suppliers.products', $supplier->id) }}"
+                                    class="mt-4 inline-flex items-center justify-center w-full
+                                bg-gray-900 hover:bg-black text-white font-medium
+                                py-2.5 rounded-xl text-sm transition">
+                                    View Products
+                                </a>
+                            @endif
+
+                        </div>
+                    </div>
+                @endforeach
+
+            </div>
+        </div>
+    </div>
     <!-- Audio Elements -->
     <audio id="welcomeAudio" preload="auto">
         <source src="{{ asset('landing-page/audio/selamat-datang.mp3') }}" type="audio/mpeg">
@@ -308,7 +406,53 @@
             link.addEventListener('click', () => unlockAudio());
         });
     </script>
+    <script>
+        const slider = document.getElementById("supplierCarousel");
 
+        // duplicate untuk seamless loop
+        slider.innerHTML += slider.innerHTML;
+
+        let speed = 0.5;
+        let isPaused = false;
+
+        // AUTO SCROLL LOOP
+        function autoScroll() {
+            if (!isPaused) {
+                slider.scrollLeft += speed;
+
+                if (slider.scrollLeft >= slider.scrollWidth / 2) {
+                    slider.scrollLeft = 0;
+                }
+            }
+
+            requestAnimationFrame(autoScroll);
+        }
+
+        autoScroll();
+
+        // pause hover (premium UX)
+        slider.addEventListener("mouseenter", () => isPaused = true);
+        slider.addEventListener("mouseleave", () => isPaused = false);
+    </script>
+    <style>
+        /* HIDE SCROLLBAR GLOBAL */
+        #supplierCarousel {
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE/Edge */
+        }
+
+        #supplierCarousel::-webkit-scrollbar {
+            display: none;
+            /* Chrome/Safari */
+        }
+
+        /* smooth feel lebih premium */
+        #supplierCarousel {
+            scroll-behavior: smooth;
+        }
+    </style>
 </body>
 
 </html>

@@ -10,37 +10,13 @@ use Illuminate\Validation\Rule;
 
 class SupplierApiController extends Controller
 {
-    public function index(Request $request)
-{
-    $query = Supplier::query();
-
-    // 🔍 SEARCH (nama & kode)
-    if ($request->search) {
-        $query->where(function ($q) use ($request) {
-            $q->where('nama_supplier', 'like', '%' . $request->search . '%')
-              ->orWhere('kode_supplier', 'like', '%' . $request->search . '%');
-        });
+    public function index()
+    {
+        return response()->json([
+            'success' => true,
+            'data' => Supplier::latest()->get()
+        ]);
     }
-
-    // 📍 FILTER KOTA
-    if ($request->kota) {
-        $query->where('kota', $request->kota);
-    }
-
-    // 🔥 FILTER STATUS
-    if ($request->status) {
-        $query->where('status', $request->status);
-    }
-
-    // 📄 PAGINATION
-    $suppliers = $query->latest()->paginate(10);
-
-    return response()->json([
-        'success' => true,
-        'message' => 'Data supplier',
-        'data' => $suppliers
-    ]);
-}
 
     public function store(Request $request)
     {
