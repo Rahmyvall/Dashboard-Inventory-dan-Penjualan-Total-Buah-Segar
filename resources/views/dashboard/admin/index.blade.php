@@ -190,14 +190,18 @@
             <!-- Chart 4 -->
             <div class="col-lg-6">
                 <div class="card border-0 shadow-xl rounded-3xl overflow-hidden h-100 bg-white dark:bg-gray-900">
+
                     <div class="card-header bg-white dark:bg-gray-900 border-0 pt-4 pb-0 px-5">
-                        <h5 class="fw-semibold text-gray-700 dark:text-gray-200">Trend Stok vs Hampir Expired</h5>
+                        <h5 class="fw-semibold text-gray-700 dark:text-gray-200">
+                            📦 Trend Stok vs Minimal Stok
+                        </h5>
                     </div>
-                    <div class="p-4 flex-grow-1">
+
+                    <div class="p-4">
                         <canvas id="Chart4" style="width: 100%; height: 360px;"></canvas>
                     </div>
-                </div>
 
+                </div>
             </div>
 
         </div>
@@ -307,96 +311,22 @@
                 }
             });
 
-            // Chart 2, 3, dan 4 juga bisa disesuaikan warna grid-nya sama seperti di atas
-            // Untuk Chart 3 (Doughnut) dan Chart 4 (multi line) warna sudah cukup adaptif
-
-            // Chart 2 - Bar
-            new Chart(document.getElementById('Chart2'), {
-                type: 'bar',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov',
-                        'Dec'
-                    ],
-                    datasets: [{
-                        label: 'Penjualan',
-                        data: [620, 710, 1020, 720, 670, 820, 700, 750, 730, 1130, 890, 920],
-                        backgroundColor: '#10b981',
-                        borderRadius: 10,
-                        barThickness: 24
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        y: {
-                            grid: {
-                                color: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)'
-                            }
-                        },
-                        x: {
-                            grid: {
-                                display: false
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Chart 3 - Doughnut (sudah cukup adaptif)
-            new Chart(document.getElementById('Chart3'), {
-                type: 'doughnut',
-                data: {
-                    labels: chartLabels, // 🔥 dari database kategori
-                    datasets: [{
-                        data: chartData, // 🔥 dari database kategori
-                        backgroundColor: chartLabels.map((_, i) =>
-                            `hsl(${i * 60}, 70%, 55%)`
-                        ),
-                        borderWidth: 4,
-                        borderColor: '#ffffff',
-                        hoverOffset: 8
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '65%',
-
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                padding: 15,
-                                usePointStyle: true
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Chart 4 - Multi Line
+            // Chart 4 - Bar
             new Chart(document.getElementById('Chart4'), {
                 type: 'line',
                 data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov',
-                        'Dec'
-                    ],
+                    labels: chartLabelsProduk.length ? chartLabelsProduk : ['Tidak Ada Data'],
+
                     datasets: [{
-                            label: 'Stok Tersedia',
-                            data: [1250, 1180, 1320, 1150, 1080, 980, 950, 1020, 1100, 980, 850, 780],
+                            label: 'Stok Produk',
+                            data: chartStokProduk.length ? chartStokProduk : [0],
                             borderColor: '#10b981',
                             borderWidth: 4,
                             tension: 0.3
                         },
                         {
-                            label: 'Hampir Expired',
-                            data: [45, 52, 38, 65, 72, 88, 95, 82, 68, 75, 92, 110],
+                            label: 'Stok Minimal',
+                            data: chartStokProduk.map(() => 10), // fallback sederhana
                             borderColor: '#ef4444',
                             borderWidth: 4,
                             tension: 0.3
@@ -406,6 +336,7 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+
                     plugins: {
                         legend: {
                             position: 'top',
@@ -415,6 +346,7 @@
                             }
                         }
                     },
+
                     scales: {
                         y: {
                             grid: {
@@ -433,7 +365,7 @@
         });
     </script>
     <script>
-        const chartLabels = @json($labels);
-        const chartData = @json($data);
+        const chartLabelsProduk = @json($labelsProduk ?? []);
+        const chartStokProduk = @json($stokProduk ?? []);
     </script>
 @endpush

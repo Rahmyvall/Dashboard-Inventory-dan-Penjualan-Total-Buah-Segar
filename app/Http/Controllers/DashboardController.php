@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\Kategori;
-use Illuminate\Support\Facades\DB;
+use App\Models\Produk;
 
 class DashboardController extends Controller
 {
@@ -18,16 +18,20 @@ class DashboardController extends Controller
 
         $title = 'Dashboard';
 
-        // 🔥 Ambil data kategori untuk chart
-        $kategoris = Kategori::select('nama_kategori')
-            ->selectRaw('COUNT(*) as total')
-            ->groupBy('nama_kategori')
+        // =========================
+        // CHART PRODUK (STOK)
+        // =========================
+        $produks = Produk::select('nama_buah', 'stok')
+            ->orderBy('stok', 'desc')
+            ->limit(10)
             ->get();
 
-        // Format untuk Chart.js
-        $labels = $kategoris->pluck('nama_kategori');
-        $data   = $kategoris->pluck('total');
+        $labelsProduk = $produks->pluck('nama_buah');
+        $stokProduk   = $produks->pluck('stok');
 
+        // =========================
+        // VIEW ROLE
+        // =========================
         $views = [
             'admin'   => 'dashboard.admin.index',
             'manager' => 'dashboard.manager.index',
@@ -42,8 +46,10 @@ class DashboardController extends Controller
         return view($views[$user->role], compact(
             'title',
             'user',
-            'labels',
-            'data'
+
+            // produk
+            'labelsProduk',
+            'stokProduk'
         ));
     }
 }
