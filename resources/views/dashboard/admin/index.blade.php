@@ -115,17 +115,40 @@
 
                             <!-- HEADER -->
                             <div class="d-flex justify-content-between align-items-center mb-20">
-                                <h6 style="font-weight:600;">Sales / Revenue</h6>
+                                <div>
+                                    <h6 style="font-weight:600;">Pelanggan Analytics</h6>
+                                    <small class="text-muted">Distribusi pelanggan berdasarkan tipe</small>
+                                </div>
+                            </div>
 
-                                <select class="form-select form-select-sm" style="width:auto; border-radius:10px;">
-                                    <option>Yearly</option>
-                                    <option>Monthly</option>
-                                    <option>Weekly</option>
-                                </select>
+                            <!-- SUMMARY -->
+                            <div class="row mb-3 text-center">
+
+                                <div class="col-4">
+                                    <div class="fw-bold text-success">
+                                        {{ \App\Models\Pelanggan::where('tipe_pelanggan', 'retail')->count() }}
+                                    </div>
+                                    <small class="text-muted">Retail</small>
+                                </div>
+
+                                <div class="col-4">
+                                    <div class="fw-bold text-warning">
+                                        {{ \App\Models\Pelanggan::where('tipe_pelanggan', 'grosir')->count() }}
+                                    </div>
+                                    <small class="text-muted">Grosir</small>
+                                </div>
+
+                                <div class="col-4">
+                                    <div class="fw-bold text-primary">
+                                        {{ \App\Models\Pelanggan::where('tipe_pelanggan', 'corporate')->count() }}
+                                    </div>
+                                    <small class="text-muted">Corporate</small>
+                                </div>
+
                             </div>
 
                             <!-- CHART -->
-                            <div style="height:350px;">
+                            <div style="height:320px;">
                                 <canvas id="Chart2"></canvas>
                             </div>
 
@@ -413,33 +436,32 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
 
-            const canvas2 = document.getElementById("Chart2");
+            const ctx = document.getElementById('Chart2');
 
-            if (!canvas2) {
-                console.error("Canvas Chart2 tidak ditemukan!");
-                return;
-            }
-
-            const ctx2 = canvas2.getContext("2d");
-
-            new Chart(ctx2, {
-                type: 'bar',
+            const chart = new Chart(ctx, {
+                type: 'doughnut',
                 data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov',
-                        'Des'
-                    ],
+                    labels: ['Retail', 'Grosir', 'Corporate'],
                     datasets: [{
-                        label: 'Revenue',
-                        data: [120, 190, 300, 250, 220, 310, 400, 380, 450, 500, 480, 600],
-                        borderWidth: 1
+                        data: [
+                            {{ \App\Models\Pelanggan::where('tipe_pelanggan', 'retail')->count() }},
+                            {{ \App\Models\Pelanggan::where('tipe_pelanggan', 'grosir')->count() }},
+                            {{ \App\Models\Pelanggan::where('tipe_pelanggan', 'corporate')->count() }}
+                        ],
+                        backgroundColor: [
+                            '#22c55e',
+                            '#f59e0b',
+                            '#3b82f6'
+                        ],
+                        borderWidth: 0
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
                         }
                     }
                 }

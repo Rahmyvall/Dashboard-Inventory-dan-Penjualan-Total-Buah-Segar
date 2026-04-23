@@ -12,14 +12,17 @@ class FrontendController extends Controller
     /**
      * 🏠 HOME PAGE
      */
-    public function index()
-    {
-        return view('welcome', [
-            'produks'   => Produk::latest()->take(8)->get(),
-            'suppliers' => Supplier::where('status', 'aktif')->latest()->get(),
-            'kategoris' => Kategori::all(),
-        ]);
-    }
+   public function index()
+{
+    return view('welcome', [
+        'produks'   => Produk::latest()->take(8)->get(),
+        'suppliers' => Supplier::where('status', 'aktif')->latest()->get(),
+        'kategoris' => Kategori::all(),
+
+        // ✅ TAMBAHKAN INI
+        'pelanggans' => \App\Models\Pelanggan::latest()->get(),
+    ]);
+}
 
     /**
      * 🏪 SUPPLIER PRODUK (SHOPEE STYLE)

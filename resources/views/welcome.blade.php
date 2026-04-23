@@ -7,6 +7,7 @@
     <title>Total Buah Segar - Buah Segar Langsung dari Kebun</title>
     <!-- Tailwind WAJIB -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Font -->
     <link
@@ -17,6 +18,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
@@ -182,285 +184,348 @@
             </div>
         </div>
     </section>
-    <!-- GLOBAL PARTNER NETWORK -->
-    <div class="relative">
+    <!-- CUSTOMER SECTION (PREMIUM MARKETPLACE UI) -->
+    <div class="relative py-20 px-6 mt-20 bg-gradient-to-b from-white via-gray-50 to-white">
 
-        <!-- HEADER PREMIUM CENTERED -->
-        <div class="text-center mb-12 space-y-4">
+        <!-- HEADER -->
+        <div class="text-center mb-14 relative z-10">
 
-            <!-- BADGE -->
             <div
                 class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full
-        bg-white/70 backdrop-blur-md border border-gray-200
-        shadow-sm text-xs text-gray-600 mx-auto">
-                <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-                Live • {{ $suppliers->count() }} Verified Partners
+            bg-white shadow-sm border text-green-600 text-xs font-semibold">
+
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+
+                Active Customers • {{ $pelanggans->count() ?? 0 }}
             </div>
 
-            <!-- TITLE (PREMIUM COLOR GRADIENT) -->
-            <h2
-                class="text-4xl md:text-6xl font-semibold tracking-tight
-    bg-linear-to-r bg-emerald-500 via-blue-400 to-white
-    bg-clip-text text-transparent drop-shadow-sm">
-                Partner Network
+            <h2 class="text-4xl md:text-6xl font-extrabold text-gray-900 mt-5">
+                Trusted Customers
             </h2>
 
-            <!-- DESCRIPTION (SOFT PREMIUM TEXT) -->
-            <p class="from-lime-400 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed">
-                Kami menghadirkan jaringan supplier terpercaya yang menyalurkan produk segar premium langsung dari
-                petani dan mitra terverifikasi untuk memastikan kualitas terbaik.
+            <p class="text-gray-500 mt-3 max-w-2xl mx-auto text-base md:text-lg">
+                Ribuan pelanggan telah memilih buah segar premium langsung dari kebun
             </p>
 
         </div>
 
-        <!-- CAROUSEL WRAPPER -->
-        <div class="relative">
+        <!-- GRID -->
+        <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
 
-            <!-- TRACK -->
-            <div id="supplierCarousel" class="flex gap-6 overflow-x-auto px-6 py-6 select-none">
+            @forelse($pelanggans->take(8) as $pelanggan)
+                <div
+                    class="group bg-white rounded-3xl border border-gray-100
+                shadow-sm hover:shadow-xl hover:-translate-y-1 transition overflow-hidden">
 
-                @foreach ($suppliers as $supplier)
-                    <div
-                        class="min-w-[260px] bg-white rounded-3xl border border-gray-100
-                    shadow-sm hover:shadow-xl transition-all duration-500
-                    hover:-translate-y-2 group">
+                    <!-- TOP BAR -->
+                    <div class="h-1 bg-gradient-to-r from-green-400 via-emerald-400 to-lime-400"></div>
 
-                        <!-- IMAGE -->
-                        <div class="relative flex justify-center pt-6">
+                    <div class="p-6">
 
-                            <div class="relative">
-                                <img src="{{ $supplier->foto
-                                    ? asset('storage/' . $supplier->foto)
-                                    : 'https://ui-avatars.com/api/?name=' . urlencode($supplier->nama_supplier ?? 'Supplier') }}"
-                                    class="w-24 h-24 rounded-full object-cover ring-4 ring-white shadow-md group-hover:scale-105 transition">
+                        <!-- HEADER -->
+                        <div class="flex items-center gap-3 mb-5">
 
-                                <span
-                                    class="absolute bottom-1 right-1 w-3 h-3 bg-green-500 rounded-full ring-2 ring-white animate-pulse"></span>
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-400 to-emerald-500
+                            flex items-center justify-center text-white font-bold text-lg">
+
+                                {{ strtoupper(substr($pelanggan->nama_pelanggan ?? '-', 0, 1)) }}
+                            </div>
+
+                            <div class="min-w-0">
+
+                                <div class="font-semibold text-gray-900 truncate">
+                                    {{ $pelanggan->nama_pelanggan ?? '-' }}
+                                </div>
+
+                                <div class="text-xs text-gray-400">
+                                    ID: {{ $pelanggan->kode_pelanggan ?? '-' }}
+                                </div>
+
                             </div>
 
                         </div>
 
-                        <!-- CONTENT -->
-                        <div class="px-5 pb-6 text-center">
+                        <!-- INFO -->
+                        <div class="space-y-2 text-sm text-gray-500">
 
-                            <h3 class="mt-4 font-semibold text-gray-900 text-base truncate">
-                                {{ $supplier->nama_supplier ?? '-' }}
-                            </h3>
-
-                            <p class="text-gray-500 text-xs mt-1">
-                                📍 {{ $supplier->kota ?? '-' }}
-                            </p>
-
-                            <p class="text-gray-400 text-[11px] mt-1 truncate">
-                                {{ $supplier->email ?? '-' }}
-                            </p>
-
-                            <div class="mt-3">
-                                <span
-                                    class="text-[10px] px-3 py-1 rounded-full font-medium
-                                {{ ($supplier->status ?? '') == 'aktif'
-                                    ? 'bg-green-50 text-green-600 border border-green-100'
-                                    : 'bg-red-50 text-red-500 border border-red-100' }}">
-                                    {{ strtoupper($supplier->status ?? 'ACTIVE') }}
-                                </span>
+                            <div class="flex items-center gap-2">
+                                📞 <span class="truncate">{{ $pelanggan->telepon ?? '-' }}</span>
                             </div>
 
-                            @if (!empty($supplier->id))
-                                <a href="{{ route('suppliers.products', $supplier->id) }}"
-                                    class="mt-4 inline-flex items-center justify-center w-full
-                                bg-gray-900 hover:bg-black text-white font-medium
-                                py-2.5 rounded-xl text-sm transition">
-                                    View Products
-                                </a>
-                            @endif
+                            <div class="flex items-center gap-2">
+                                ✉️ <span class="truncate">{{ $pelanggan->email ?? '-' }}</span>
+                            </div>
 
                         </div>
+
+                        <!-- BADGE -->
+                        <div class="mt-5">
+
+                            @php
+                                $tipe = $pelanggan->tipe_pelanggan ?? 'unknown';
+
+                                $badge = match ($tipe) {
+                                    'retail' => 'from-green-400 to-emerald-500',
+                                    'grosir' => 'from-yellow-400 to-orange-400',
+                                    'corporate' => 'from-blue-400 to-indigo-500',
+                                    default => 'from-gray-300 to-gray-400',
+                                };
+                            @endphp
+
+                            <span
+                                class="inline-flex px-3 py-1 rounded-full text-xs font-semibold text-white
+                            bg-gradient-to-r {{ $badge }}">
+
+                                {{ ucfirst($tipe) }}
+                            </span>
+
+                        </div>
+
                     </div>
-                @endforeach
 
-            </div>
+                </div>
+
+            @empty
+
+                <div class="col-span-4 text-center py-16 text-gray-400">
+                    👥 Belum ada pelanggan terdaftar
+                </div>
+            @endforelse
+
         </div>
     </div>
-    <!-- Audio Elements -->
-    <audio id="welcomeAudio" preload="auto">
-        <source src="{{ asset('landing-page/audio/selamat-datang.mp3') }}" type="audio/mpeg">
-    </audio>
+    <!-- GLOBAL PARTNER NETWORK -->
+    <div class="relative py-12">
 
-    <audio id="clickAudio" preload="auto">
-        <source src="{{ asset('landing-page/audio/click.mp3') }}" type="audio/mpeg">
-    </audio>
+        <!-- GLOBAL PARTNER NETWORK -->
+        <div class="relative"> <!-- HEADER PREMIUM CENTERED -->
+            <div class="text-center mb-12 space-y-4"> <!-- BADGE -->
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/70 backdrop-blur-md border border-gray-200 shadow-sm text-xs text-gray-600 mx-auto">
+                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span> Live •
+                    {{ $suppliers->count() }} Verified Partners
+                </div> <!-- TITLE (PREMIUM COLOR GRADIENT) -->
+                <h2
+                    class="text-4xl md:text-6xl font-semibold tracking-tight bg-linear-to-r bg-emerald-500 via-blue-400 to-white bg-clip-text text-transparent drop-shadow-sm">
+                    Partner Network </h2> <!-- DESCRIPTION (SOFT PREMIUM TEXT) -->
+                <p class="from-lime-400 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed"> Kami menghadirkan
+                    jaringan supplier terpercaya yang menyalurkan produk segar premium langsung dari petani dan mitra
+                    terverifikasi untuk memastikan kualitas terbaik. </p>
+            </div> <!-- CAROUSEL WRAPPER -->
+            <div class="relative"> <!-- TRACK -->
+                <div id="supplierCarousel" class="flex gap-6 overflow-x-auto px-6 py-6 select-none">
+                    @foreach ($suppliers as $supplier)
+                        <div
+                            class="min-w-[260px] bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 group">
+                            <!-- IMAGE -->
+                            <div class="relative flex justify-center pt-6">
+                                <div class="relative"> <img
+                                        src="{{ $supplier->foto ? asset('storage/' . $supplier->foto) : 'https://ui-avatars.com/api/?name=' . urlencode($supplier->nama_supplier ?? 'Supplier') }}"
+                                        class="w-24 h-24 rounded-full object-cover ring-4 ring-white shadow-md group-hover:scale-105 transition">
+                                    <span
+                                        class="absolute bottom-1 right-1 w-3 h-3 bg-green-500 rounded-full ring-2 ring-white animate-pulse"></span>
+                                </div>
+                            </div> <!-- CONTENT -->
+                            <div class="px-5 pb-6 text-center">
+                                <h3 class="mt-4 font-semibold text-gray-900 text-base truncate">
+                                    {{ $supplier->nama_supplier ?? '-' }} </h3>
+                                <p class="text-gray-500 text-xs mt-1"> 📍 {{ $supplier->kota ?? '-' }} </p>
+                                <p class="text-gray-400 text-[11px] mt-1 truncate"> {{ $supplier->email ?? '-' }} </p>
+                                <div class="mt-3"> <span
+                                        class="text-[10px] px-3 py-1 rounded-full font-medium {{ ($supplier->status ?? '') == 'aktif' ? 'bg-green-50 text-green-600 border border-green-100' : 'bg-red-50 text-red-500 border border-red-100' }}">
+                                        {{ strtoupper($supplier->status ?? 'ACTIVE') }} </span> </div>
+                                @if (!empty($supplier->id))
+                                    <a href="{{ route('suppliers.products', $supplier->id) }}"
+                                        class="mt-4 inline-flex items-center justify-center w-full bg-gray-900 hover:bg-black text-white font-medium py-2.5 rounded-xl text-sm transition">
+                                        View Products </a>
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        <!-- Audio Elements -->
+        <audio id="welcomeAudio" preload="auto">
+            <source src="{{ asset('landing-page/audio/selamat-datang.mp3') }}" type="audio/mpeg">
+        </audio>
 
-    <audio id="hoverAudio" preload="auto">
-        <source src="{{ asset('landing-page/audio/hover.mp3') }}" type="audio/mpeg">
-    </audio>
+        <audio id="clickAudio" preload="auto">
+            <source src="{{ asset('landing-page/audio/click.mp3') }}" type="audio/mpeg">
+        </audio>
 
-    <script>
-        // Audio Elements
-        const welcomeAudio = document.getElementById('welcomeAudio');
-        const clickAudio = document.getElementById('clickAudio');
-        const hoverAudio = document.getElementById('hoverAudio');
+        <audio id="hoverAudio" preload="auto">
+            <source src="{{ asset('landing-page/audio/hover.mp3') }}" type="audio/mpeg">
+        </audio>
 
-        let soundEnabled = true;
-        let welcomePlayed = false;
-        let audioUnlocked = false;
+        <script>
+            // Audio Elements
+            const welcomeAudio = document.getElementById('welcomeAudio');
+            const clickAudio = document.getElementById('clickAudio');
+            const hoverAudio = document.getElementById('hoverAudio');
 
-        // === FUNGSI PLAY WELCOME (dijalankan setelah unlock) ===
-        function playWelcomeSound() {
-            if (welcomePlayed || !soundEnabled || !welcomeAudio || !audioUnlocked) return;
+            let soundEnabled = true;
+            let welcomePlayed = false;
+            let audioUnlocked = false;
 
-            welcomeAudio.volume = 0.65;
-            const playPromise = welcomeAudio.play();
+            // === FUNGSI PLAY WELCOME (dijalankan setelah unlock) ===
+            function playWelcomeSound() {
+                if (welcomePlayed || !soundEnabled || !welcomeAudio || !audioUnlocked) return;
 
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    welcomePlayed = true;
-                    localStorage.setItem('welcomeSoundPlayed', 'true');
-                }).catch(err => {
-                    console.log("Welcome sound gagal diputar:", err);
-                });
-            }
-        }
+                welcomeAudio.volume = 0.65;
+                const playPromise = welcomeAudio.play();
 
-        // Click Sound
-        function playClickSound() {
-            if (!soundEnabled || !clickAudio) return;
-            clickAudio.currentTime = 0;
-            clickAudio.volume = 0.7;
-            clickAudio.play().catch(() => {});
-        }
-
-        // Hover Sound
-        function playHoverSound() {
-            if (!soundEnabled || !hoverAudio || !audioUnlocked) return;
-            hoverAudio.currentTime = 0;
-            hoverAudio.volume = 0.4;
-            hoverAudio.play().catch(() => {});
-        }
-
-        // Toggle Sound Button
-        function toggleSound() {
-            soundEnabled = !soundEnabled;
-
-            const icon = document.getElementById('soundIcon');
-            const text = document.getElementById('soundText');
-
-            if (soundEnabled) {
-                icon.classList.remove('fa-volume-mute');
-                icon.classList.add('fa-volume-up');
-                text.textContent = 'Suara Aktif';
-            } else {
-                icon.classList.remove('fa-volume-up');
-                icon.classList.add('fa-volume-mute');
-                text.textContent = 'Suara Mati';
-            }
-        }
-
-        // Unlock Audio Context (paling penting!)
-        function unlockAudio() {
-            if (audioUnlocked) return;
-            audioUnlocked = true;
-
-            // Resume semua audio (penting untuk beberapa browser)
-            [welcomeAudio, clickAudio, hoverAudio].forEach(audio => {
-                if (audio) audio.volume = audio.volume || 1; // pastikan tidak NaN
-            });
-
-            // Mainkan welcome sound jika belum pernah diputar
-            if (!welcomePlayed && soundEnabled) {
-                setTimeout(() => {
-                    playWelcomeSound();
-                }, 300);
-            }
-        }
-
-        // Event Listeners
-        window.addEventListener('load', () => {
-            // Cek apakah sudah pernah diputar hari ini
-            if (localStorage.getItem('welcomeSoundPlayed') === 'true') {
-                welcomePlayed = true;
-            }
-
-            // Inisialisasi icon toggle (pastikan benar dari awal)
-            const icon = document.getElementById('soundIcon');
-            if (icon) {
-                icon.classList.add('fa-volume-up');
-            }
-        });
-
-        // Unlock audio setelah user interaksi pertama kali (klik di mana saja)
-        document.addEventListener('click', () => {
-            unlockAudio();
-        }, {
-            once: true
-        });
-
-        // Tambahan unlock untuk touch device
-        document.addEventListener('touchstart', () => {
-            unlockAudio();
-        }, {
-            once: true
-        });
-
-        // Hover sound hanya ke elemen penting (lebih ringan)
-        const hoverElements = document.querySelectorAll('button, a[href], .interactive-btn, [onclick*="playHoverSound"]');
-        hoverElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                if (soundEnabled) playHoverSound();
-            });
-        });
-
-        // Bonus: klik logo juga unlock audio
-        document.querySelectorAll('a[href="#"]').forEach(link => {
-            link.addEventListener('click', () => unlockAudio());
-        });
-    </script>
-    <script>
-        const slider = document.getElementById("supplierCarousel");
-
-        // duplicate untuk seamless loop
-        slider.innerHTML += slider.innerHTML;
-
-        let speed = 0.5;
-        let isPaused = false;
-
-        // AUTO SCROLL LOOP
-        function autoScroll() {
-            if (!isPaused) {
-                slider.scrollLeft += speed;
-
-                if (slider.scrollLeft >= slider.scrollWidth / 2) {
-                    slider.scrollLeft = 0;
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        welcomePlayed = true;
+                        localStorage.setItem('welcomeSoundPlayed', 'true');
+                    }).catch(err => {
+                        console.log("Welcome sound gagal diputar:", err);
+                    });
                 }
             }
 
-            requestAnimationFrame(autoScroll);
-        }
+            // Click Sound
+            function playClickSound() {
+                if (!soundEnabled || !clickAudio) return;
+                clickAudio.currentTime = 0;
+                clickAudio.volume = 0.7;
+                clickAudio.play().catch(() => {});
+            }
 
-        autoScroll();
+            // Hover Sound
+            function playHoverSound() {
+                if (!soundEnabled || !hoverAudio || !audioUnlocked) return;
+                hoverAudio.currentTime = 0;
+                hoverAudio.volume = 0.4;
+                hoverAudio.play().catch(() => {});
+            }
 
-        // pause hover (premium UX)
-        slider.addEventListener("mouseenter", () => isPaused = true);
-        slider.addEventListener("mouseleave", () => isPaused = false);
-    </script>
-    <style>
-        /* HIDE SCROLLBAR GLOBAL */
-        #supplierCarousel {
-            scrollbar-width: none;
-            /* Firefox */
-            -ms-overflow-style: none;
-            /* IE/Edge */
-        }
+            // Toggle Sound Button
+            function toggleSound() {
+                soundEnabled = !soundEnabled;
 
-        #supplierCarousel::-webkit-scrollbar {
-            display: none;
-            /* Chrome/Safari */
-        }
+                const icon = document.getElementById('soundIcon');
+                const text = document.getElementById('soundText');
 
-        /* smooth feel lebih premium */
-        #supplierCarousel {
-            scroll-behavior: smooth;
-        }
-    </style>
+                if (soundEnabled) {
+                    icon.classList.remove('fa-volume-mute');
+                    icon.classList.add('fa-volume-up');
+                    text.textContent = 'Suara Aktif';
+                } else {
+                    icon.classList.remove('fa-volume-up');
+                    icon.classList.add('fa-volume-mute');
+                    text.textContent = 'Suara Mati';
+                }
+            }
+
+            // Unlock Audio Context (paling penting!)
+            function unlockAudio() {
+                if (audioUnlocked) return;
+                audioUnlocked = true;
+
+                // Resume semua audio (penting untuk beberapa browser)
+                [welcomeAudio, clickAudio, hoverAudio].forEach(audio => {
+                    if (audio) audio.volume = audio.volume || 1; // pastikan tidak NaN
+                });
+
+                // Mainkan welcome sound jika belum pernah diputar
+                if (!welcomePlayed && soundEnabled) {
+                    setTimeout(() => {
+                        playWelcomeSound();
+                    }, 300);
+                }
+            }
+
+            // Event Listeners
+            window.addEventListener('load', () => {
+                // Cek apakah sudah pernah diputar hari ini
+                if (localStorage.getItem('welcomeSoundPlayed') === 'true') {
+                    welcomePlayed = true;
+                }
+
+                // Inisialisasi icon toggle (pastikan benar dari awal)
+                const icon = document.getElementById('soundIcon');
+                if (icon) {
+                    icon.classList.add('fa-volume-up');
+                }
+            });
+
+            // Unlock audio setelah user interaksi pertama kali (klik di mana saja)
+            document.addEventListener('click', () => {
+                unlockAudio();
+            }, {
+                once: true
+            });
+
+            // Tambahan unlock untuk touch device
+            document.addEventListener('touchstart', () => {
+                unlockAudio();
+            }, {
+                once: true
+            });
+
+            // Hover sound hanya ke elemen penting (lebih ringan)
+            const hoverElements = document.querySelectorAll('button, a[href], .interactive-btn, [onclick*="playHoverSound"]');
+            hoverElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    if (soundEnabled) playHoverSound();
+                });
+            });
+
+            // Bonus: klik logo juga unlock audio
+            document.querySelectorAll('a[href="#"]').forEach(link => {
+                link.addEventListener('click', () => unlockAudio());
+            });
+        </script>
+        <script>
+            const slider = document.getElementById("supplierCarousel");
+
+            // duplicate untuk seamless loop
+            slider.innerHTML += slider.innerHTML;
+
+            let speed = 0.5;
+            let isPaused = false;
+
+            // AUTO SCROLL LOOP
+            function autoScroll() {
+                if (!isPaused) {
+                    slider.scrollLeft += speed;
+
+                    if (slider.scrollLeft >= slider.scrollWidth / 2) {
+                        slider.scrollLeft = 0;
+                    }
+                }
+
+                requestAnimationFrame(autoScroll);
+            }
+
+            autoScroll();
+
+            // pause hover (premium UX)
+            slider.addEventListener("mouseenter", () => isPaused = true);
+            slider.addEventListener("mouseleave", () => isPaused = false);
+        </script>
+        <style>
+            /* HIDE SCROLLBAR GLOBAL */
+            #supplierCarousel {
+                scrollbar-width: none;
+                /* Firefox */
+                -ms-overflow-style: none;
+                /* IE/Edge */
+            }
+
+            #supplierCarousel::-webkit-scrollbar {
+                display: none;
+                /* Chrome/Safari */
+            }
+
+            /* smooth feel lebih premium */
+            #supplierCarousel {
+                scroll-behavior: smooth;
+            }
+        </style>
 </body>
 
 </html>

@@ -7,8 +7,10 @@
         <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
 
             <div>
-                <h4 class="fw-bold mb-1">👥 Customer CRM</h4>
-                <div class="text-muted small">Manage customers, segment & analytics</div>
+                <h4 class="fw-bold mb-1">👥 Manajemen Pelanggan</h4>
+                <div class="text-muted small">
+                    Kelola data pelanggan retail, grosir, dan corporate secara terpusat
+                </div>
             </div>
 
             <a href="{{ route('pelanggan.create') }}" class="btn btn-primary px-4 shadow-sm">
@@ -66,7 +68,8 @@
                             <option value="">All Segment</option>
                             <option value="retail" {{ request('tipe') == 'retail' ? 'selected' : '' }}>Retail</option>
                             <option value="grosir" {{ request('tipe') == 'grosir' ? 'selected' : '' }}>Wholesale</option>
-                            <option value="corporate" {{ request('tipe') == 'corporate' ? 'selected' : '' }}>Corporate</option>
+                            <option value="corporate" {{ request('tipe') == 'corporate' ? 'selected' : '' }}>Corporate
+                            </option>
                         </select>
                     </div>
 
