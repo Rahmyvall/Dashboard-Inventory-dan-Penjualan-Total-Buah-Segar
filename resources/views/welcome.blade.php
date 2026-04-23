@@ -5,10 +5,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Total Buah Segar - Buah Segar Langsung dari Kebun</title>
-
+    <!-- Tailwind WAJIB -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
+    <!-- Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
@@ -110,7 +116,7 @@
                 </div>
 
                 <h1 class="text-6xl lg:text-7xl font-semibold leading-none tracking-tighter">
-                    Mau buah yang benar-benar segar?<br>
+                    Mau buah yang benar-benar segar ?<br>
                     <span class="gradient-text">Kami antar langsung dari kebun</span>
                 </h1>
 

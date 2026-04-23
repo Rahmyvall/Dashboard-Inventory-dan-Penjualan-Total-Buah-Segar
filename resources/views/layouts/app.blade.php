@@ -31,7 +31,7 @@
 
                                 <!-- Modern Search Bar -->
                                 <!-- Modern Search Bar dengan Live Search -->
-                                <div class="header-search flex-grow-1" style="max-width: 460px;">
+                                <div class="header-search grow" style="max-width: 460px;">
                                     <div class="position-relative">
 
                                         <input type="text" id="globalSearch"

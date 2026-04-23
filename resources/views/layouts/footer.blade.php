@@ -22,7 +22,6 @@
 <!-- ======== main-wrapper end =========== -->
 
 <!-- ========= All Javascript files linkup ======== -->
-<!-- ========= All Javascript files linkup ======== -->
 <script src="{{ asset('admin/assets/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('admin/assets/js/Chart.min.js') }}"></script>
 <script src="{{ asset('admin/assets/js/dynamic-pie-chart.js') }}"></script>

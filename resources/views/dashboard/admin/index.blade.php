@@ -3,288 +3,393 @@
 @section('title', 'Dashboard Administrator - Total Buah Segar')
 
 @section('content')
-    <div class="container-fluid px-3 px-md-4 px-xl-5 py-4 min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors">
-
-        <!-- ==================== HEADER ==================== -->
-        <div class="d-flex justify-content-between align-items-center mb-5">
-            <div class="d-flex align-items-center gap-4">
-                <div class="bg-linear-to-br from-emerald-500 to-green-600 p-4 rounded-3xl text-white shadow-xl"
-                    style="font-size: 2.2rem;">
-                    🍓
-                </div>
-                <div>
-                    <h1 class="mb-1 fw-bold text-3xl text-gray-800 dark:text-white">Dashboard Administrator</h1>
-                    <p class="text-muted mb-0 dark:text-gray-400">Total Buah Segar • Selamat datang kembali, Admin! 👋</p>
-                </div>
-            </div>
-
-            <div class="text-end">
-                <div class="text-muted small dark:text-gray-400">{{ \Carbon\Carbon::now()->format('l, d F Y') }}</div>
-                <div
-                    class="badge bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300 px-3 py-1 rounded-pill">
-                    Online</div>
-            </div>
-        </div>
-
-        <!-- ==================== STATISTIK CARDS ==================== -->
-        <div class="row g-4 mb-2">
-            <!-- Card 1 -->
-            <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6">
-                <div
-                    class="card border-0 shadow-xl h-100 overflow-hidden hover:shadow-2xl transition-all duration-300 rounded-3xl bg-white dark:bg-gray-900">
-                    <div class="card-body p-5">
-                        <div class="d-flex justify-content-between align-items-start">
-                            <div>
-                                <p class="text-muted small mb-2 dark:text-gray-400">Pesanan Baru</p>
-                                <h3 class="fw-bold mb-1 text-4xl text-gray-800 dark:text-white">34,567</h3>
-                                <p class="text-emerald-600 dark:text-emerald-400 small d-flex align-items-center gap-1">
-                                    <i class="fas fa-arrow-trend-up"></i> +2.00%
-                                    <span class="text-muted dark:text-gray-500">(30 hari)</span>
+    <!-- ========== section start ========== -->
+    <section class="section">
+        <div class="container-fluid">
+            <div class="title-wrapper pt-30">
+                <!-- ========== title-wrapper end ========== -->
+                <div class="row">
+                    <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <div class="icon-card mb-30">
+                            <div class="icon purple">
+                                <i class="lni lni-cart-full"></i>
+                            </div>
+                            <div class="content">
+                                <h6 class="mb-10">New Orders</h6>
+                                <h3 class="text-bold mb-10">34567</h3>
+                                <p class="text-sm text-success">
+                                    <i class="lni lni-arrow-up"></i> +2.00%
+                                    <span class="text-gray">(30 days)</span>
                                 </p>
                             </div>
-                            <div
-                                class="p-4 rounded-2xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 fs-1">
-                                🛍️</div>
                         </div>
+                        <!-- End Icon Cart -->
                     </div>
-                    <div class="h-1.5 bg-linear-to-r from-emerald-400 to-green-500"></div>
-                </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6">
-                <div
-                    class="card border-0 shadow-xl h-100 overflow-hidden hover:shadow-2xl transition-all duration-300 rounded-3xl bg-white dark:bg-gray-900">
-                    <div class="card-body p-5">
-                        <div class="d-flex justify-content-between align-items-start">
-                            <div>
-                                <p class="text-muted small mb-2 dark:text-gray-400">Total Pendapatan</p>
-                                <h3 class="fw-bold mb-1 text-4xl text-emerald-600 dark:text-emerald-400">Rp 87,4jt</h3>
-                                <p class="text-emerald-600 dark:text-emerald-400 small d-flex align-items-center gap-1">
-                                    <i class="fas fa-arrow-trend-up"></i> +5.45%
-                                    <span class="text-muted dark:text-gray-500">Bulan ini</span>
+                    <!-- End Col -->
+                    <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <div class="icon-card mb-30">
+                            <div class="icon success">
+                                <i class="lni lni-dollar"></i>
+                            </div>
+                            <div class="content">
+                                <h6 class="mb-10">Total Income</h6>
+                                <h3 class="text-bold mb-10">$74,567</h3>
+                                <p class="text-sm text-success">
+                                    <i class="lni lni-arrow-up"></i> +5.45%
+                                    <span class="text-gray">Increased</span>
                                 </p>
                             </div>
-                            <div
-                                class="p-4 rounded-2xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 fs-1">
-                                💰</div>
                         </div>
+                        <!-- End Icon Cart -->
                     </div>
-                    <div class="h-1.5 bg-linear-to-r from-emerald-500 to-teal-500"></div>
-                </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6">
-                <div
-                    class="card border-0 shadow-xl h-100 overflow-hidden hover:shadow-2xl transition-all duration-300 rounded-3xl bg-white dark:bg-gray-900">
-                    <div class="card-body p-5">
-                        <div class="d-flex justify-content-between align-items-start">
-                            <div>
-                                <p class="text-muted small mb-2 dark:text-gray-400">Total Stok</p>
-                                <h3 class="fw-bold mb-1 text-4xl text-gray-800 dark:text-white">1,284 kg</h3>
-                                <p class="text-amber-600 dark:text-amber-400 small d-flex align-items-center gap-1">
-                                    <i class="fas fa-arrow-trend-down"></i> -12 kg
-                                    <span class="text-muted dark:text-gray-500">Hari ini</span>
+                    <!-- End Col -->
+                    <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <div class="icon-card mb-30">
+                            <div class="icon primary">
+                                <i class="lni lni-credit-cards"></i>
+                            </div>
+                            <div class="content">
+                                <h6 class="mb-10">Total Expense</h6>
+                                <h3 class="text-bold mb-10">$24,567</h3>
+                                <p class="text-sm text-danger">
+                                    <i class="lni lni-arrow-down"></i> -2.00%
+                                    <span class="text-gray">Expense</span>
                                 </p>
                             </div>
-                            <div
-                                class="p-4 rounded-2xl bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 fs-1">
-                                📦</div>
                         </div>
+                        <!-- End Icon Cart -->
                     </div>
-                    <div class="h-1.5 bg-linear-to-r from-amber-400 to-orange-500"></div>
-                </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6">
-                <div
-                    class="card border-0 shadow-xl h-100 overflow-hidden hover:shadow-2xl transition-all duration-300 rounded-3xl bg-white dark:bg-gray-900">
-                    <div class="card-body p-5">
-                        <div class="d-flex justify-content-between align-items-start">
-                            <div>
-                                <p class="text-muted small mb-2 dark:text-gray-400">Hampir Expired</p>
-                                <h3 class="fw-bold mb-1 text-4xl text-red-600 dark:text-red-400">18</h3>
-                                <p class="text-red-600 dark:text-red-400 small">Perlu perhatian segera!</p>
+                    <!-- End Col -->
+                    <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <div class="icon-card mb-30">
+                            <div class="icon orange">
+                                <i class="lni lni-user"></i>
                             </div>
-                            <div class="p-4 rounded-2xl bg-red-100 dark:bg-red-950 text-red-600 dark:text-red-400 fs-1">⏰
+                            <div class="content">
+                                <h6 class="mb-10">New User</h6>
+                                <h3 class="text-bold mb-10">34567</h3>
+                                <p class="text-sm text-danger">
+                                    <i class="lni lni-arrow-down"></i> -25.00%
+                                    <span class="text-gray"> Earning</span>
+                                </p>
                             </div>
                         </div>
+                        <!-- End Icon Cart -->
                     </div>
-                    <div class="h-1.5 bg-linear-to-r from-red-400 to-rose-500"></div>
+                    <!-- End Col -->
                 </div>
-            </div>
-        </div>
+                <!-- End Row -->
+                <div class="row g-4">
 
-        <!-- ==================== 4 CHART SECTION ==================== -->
-        <div class="row g-4 mb-5">
+                    <!-- CHART 1 -->
+                    <div class="col-lg-7">
+                        <div class="card-style mb-30"
+                            style="border-radius:15px; box-shadow:0 4px 20px rgba(0,0,0,0.05); padding:20px;">
 
-            <!-- Chart 1 -->
-            <div class="col-lg-6">
-                <div class="card border-0 shadow-xl rounded-3xl overflow-hidden h-100 bg-white dark:bg-gray-900">
-                    <div class="card-header bg-white dark:bg-gray-900 border-0 pt-4 pb-0 px-5">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="fw-semibold text-gray-700 dark:text-gray-200">Pendapatan Tahunan</h5>
-                                <p class="text-emerald-600 dark:text-emerald-400 fw-bold fs-4 mb-0">Rp 245,479 jt</p>
+                            <!-- HEADER -->
+                            <div class="d-flex justify-content-between align-items-center mb-20">
+                                <div>
+                                    <h6 style="color:#888;">Yearly Stats</h6>
+                                    <h2 style="font-weight:700;">$245,479</h2>
+                                </div>
+
+                                <select class="form-select form-select-sm" style="width:auto; border-radius:10px;">
+                                    <option>Yearly</option>
+                                    <option>Monthly</option>
+                                    <option>Weekly</option>
+                                </select>
                             </div>
-                            <select
-                                class="form-select w-auto rounded-2xl border-0 bg-gray-100 dark:bg-gray-800 dark:text-white">
-                                <option>Yearly</option>
-                            </select>
+
+                            <!-- CHART -->
+                            <div style="height:350px;">
+                                <canvas id="Chart1"></canvas>
+                            </div>
+
                         </div>
                     </div>
-                    <div class="p-4 grow">
-                        <canvas id="Chart1" style="width: 100%; height: 360px;"></canvas>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Chart 2 -->
-            <div class="col-lg-6">
-                <div class="card border-0 shadow-xl rounded-3xl overflow-hidden h-100 bg-white dark:bg-gray-900">
-                    <div class="card-header bg-white dark:bg-gray-900 border-0 pt-4 pb-0 px-5">
-                        <h5 class="fw-semibold text-gray-700 dark:text-gray-200">Penjualan Bulanan</h5>
-                    </div>
-                    <div class="p-4 grow">
-                        <canvas id="Chart2" style="width: 100%; height: 360px;"></canvas>
-                    </div>
-                </div>
-            </div>
+                    <!-- CHART 2 -->
+                    <div class="col-lg-5">
+                        <div class="card-style mb-30"
+                            style="border-radius:15px; box-shadow:0 4px 20px rgba(0,0,0,0.05); padding:20px;">
 
-            <!-- Chart 3 -->
-            <div class="col-lg-6">
-                <div class="card border-0 shadow-lg rounded-4 h-100">
+                            <!-- HEADER -->
+                            <div class="d-flex justify-content-between align-items-center mb-20">
+                                <h6 style="font-weight:600;">Sales / Revenue</h6>
 
-                    <!-- Header -->
-                    <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center px-4 py-3">
-                        <div>
-                            <h6 class="fw-semibold mb-1">Komposisi Kategori</h6>
-                            <small class="text-muted">Distribusi berdasarkan data kategori</small>
-                        </div>
+                                <select class="form-select form-select-sm" style="width:auto; border-radius:10px;">
+                                    <option>Yearly</option>
+                                    <option>Monthly</option>
+                                    <option>Weekly</option>
+                                </select>
+                            </div>
 
-                        <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2">
-                            📊 Chart
-                        </span>
-                    </div>
+                            <!-- CHART -->
+                            <div style="height:350px;">
+                                <canvas id="Chart2"></canvas>
+                            </div>
 
-                    <!-- Body -->
-                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
-
-                        <!-- Chart -->
-                        <div style="width: 100%; max-width: 320px;">
-                            <canvas id="Chart3"></canvas>
-                        </div>
-
-                        <!-- Info kecil -->
-                        <small class="text-muted mt-3">
-                            Klik chart untuk melihat detail kategori
-                        </small>
-
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Chart 4 -->
-            <div class="col-lg-6">
-                <div class="card border-0 shadow-xl rounded-3xl overflow-hidden h-100 bg-white dark:bg-gray-900">
-
-                    <div class="card-header bg-white dark:bg-gray-900 border-0 pt-4 pb-0 px-5">
-                        <h5 class="fw-semibold text-gray-700 dark:text-gray-200">
-                            📦 Trend Stok vs Minimal Stok
-                        </h5>
-                    </div>
-
-                    <div class="p-4">
-                        <canvas id="Chart4" style="width: 100%; height: 360px;"></canvas>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-
-        <!-- ==================== TABEL PESANAN TERBARU ==================== -->
-        <div class="row">
-            <div class="col-12">
-                <div class="card border-0  rounded-3xl overflow-hidden bg-white dark:bg-gray-900">
-                    <div
-                        class="card-header bg-white dark:bg-gray-900 border-0 pt-4 pb-3 px-5 d-flex justify-content-between align-items-center">
-                        <h5 class="fw-semibold text-gray-700 dark:text-gray-200 mb-0">Pesanan Terbaru</h5>
-                        <a href="#" class="text-emerald-600 dark:text-emerald-400 fw-medium small">Lihat Semua Pesanan
-                            →</a>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table table-hover mb-0 align-middle">
-                                <thead class="bg-gray-100 dark:bg-gray-800">
-                                    <tr>
-                                        <th class="ps-5 text-gray-600 dark:text-gray-300">ID Pesanan</th>
-                                        <th class="text-gray-600 dark:text-gray-300">Produk</th>
-                                        <th class="text-gray-600 dark:text-gray-300">Pelanggan</th>
-                                        <th class="text-center text-gray-600 dark:text-gray-300">Jumlah</th>
-                                        <th class="text-end text-gray-600 dark:text-gray-300">Total</th>
-                                        <th class="text-center text-gray-600 dark:text-gray-300">Status</th>
-                                        <th class="text-center text-gray-600 dark:text-gray-300">Tanggal</th>
-                                        <th class="pe-5 text-end text-gray-600 dark:text-gray-300">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="text-gray-700 dark:text-gray-300">
-                                    <!-- Isi tabel tetap sama, hanya warna teks yang disesuaikan -->
-                                    <tr>
-                                        <td class="ps-5 fw-medium">#TS-7842</td>
-                                        <td>Strawberry Premium (2 kg)</td>
-                                        <td>Budi Santoso</td>
-                                        <td class="text-center">3</td>
-                                        <td class="text-end fw-semibold">Rp 285,000</td>
-                                        <td class="text-center"><span
-                                                class="badge bg-success rounded-pill px-3 py-1">Selesai</span></td>
-                                        <td class="text-center text-muted dark:text-gray-500">18 Apr 2026</td>
-                                        <td class="pe-5 text-end">
-                                            <button
-                                                class="btn btn-sm btn-outline-secondary dark:border-gray-600 dark:text-gray-300">Detail</button>
-                                        </td>
-                                    </tr>
-                                    <!-- Tambahkan 3 baris lainnya seperti sebelumnya (saya singkat di sini) -->
-                                    <!-- ... (sama seperti kode sebelumnya) ... -->
-                                </tbody>
-                            </table>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <div class="card-style calendar-card mb-30">
+                                <div id="calendar-mini"></div>
+                            </div>
+                        </div>
+                        <!-- End Col -->
+                        <div class="col-lg-7">
+                            <div class="card-style mb-30">
+                                <div class="title d-flex flex-wrap align-items-center justify-content-between">
+                                    <div class="left">
+                                        <h6 class="text-medium mb-30">Sales History</h6>
+                                    </div>
+                                    <div class="right">
+                                        <div class="select-style-1">
+                                            <div class="select-position select-sm">
+                                                <select class="light-bg">
+                                                    <option value="">Today</option>
+                                                    <option value="">Yesterday</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- end select -->
+                                    </div>
+                                </div>
+                                <!-- End Title -->
+                                <div class="table-responsive">
+                                    <table class="table top-selling-table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <h6 class="text-sm text-medium">Products</h6>
+                                                </th>
+                                                <th class="min-width">
+                                                    <h6 class="text-sm text-medium">
+                                                        Category <i class="lni lni-arrows-vertical"></i>
+                                                    </h6>
+                                                </th>
+                                                <th class="min-width">
+                                                    <h6 class="text-sm text-medium">
+                                                        Revenue <i class="lni lni-arrows-vertical"></i>
+                                                    </h6>
+                                                </th>
+                                                <th class="min-width">
+                                                    <h6 class="text-sm text-medium">
+                                                        Status <i class="lni lni-arrows-vertical"></i>
+                                                    </h6>
+                                                </th>
+                                                <th>
+                                                    <h6 class="text-sm text-medium text-end">
+                                                        Actions <i class="lni lni-arrows-vertical"></i>
+                                                    </h6>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="product">
+                                                        <div class="image">
+                                                            <img src="assets/images/products/product-mini-1.jpg"
+                                                                alt="" />
+                                                        </div>
+                                                        <p class="text-sm">Bedroom</p>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm">Interior</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm">$345</p>
+                                                </td>
+                                                <td>
+                                                    <span class="status-btn close-btn">Pending</span>
+                                                </td>
+                                                <td>
+                                                    <div class="action justify-content-end">
+                                                        <button class="edit">
+                                                            <i class="lni lni-pencil"></i>
+                                                        </button>
+                                                        <button class="more-btn ml-10 dropdown-toggle" id="moreAction1"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="lni lni-more-alt"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-end"
+                                                            aria-labelledby="moreAction1">
+                                                            <li class="dropdown-item">
+                                                                <a href="#0" class="text-gray">Remove</a>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <a href="#0" class="text-gray">Edit</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="product">
+                                                        <div class="image">
+                                                            <img src="assets/images/products/product-mini-2.jpg"
+                                                                alt="" />
+                                                        </div>
+                                                        <p class="text-sm">Arm Chair</p>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm">Interior</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm">$345</p>
+                                                </td>
+                                                <td>
+                                                    <span class="status-btn warning-btn">Refund</span>
+                                                </td>
+                                                <td>
+                                                    <div class="action justify-content-end">
+                                                        <button class="edit">
+                                                            <i class="lni lni-pencil"></i>
+                                                        </button>
+                                                        <button class="more-btn ml-10 dropdown-toggle" id="moreAction1"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="lni lni-more-alt"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-end"
+                                                            aria-labelledby="moreAction1">
+                                                            <li class="dropdown-item">
+                                                                <a href="#0" class="text-gray">Remove</a>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <a href="#0" class="text-gray">Edit</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="product">
+                                                        <div class="image">
+                                                            <img src="assets/images/products/product-mini-3.jpg"
+                                                                alt="" />
+                                                        </div>
+                                                        <p class="text-sm">Sofa</p>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm">Interior</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm">$345</p>
+                                                </td>
+                                                <td>
+                                                    <span class="status-btn success-btn">Completed</span>
+                                                </td>
+                                                <td>
+                                                    <div class="action justify-content-end">
+                                                        <button class="edit">
+                                                            <i class="lni lni-pencil"></i>
+                                                        </button>
+                                                        <button class="more-btn ml-10 dropdown-toggle" id="moreAction1"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="lni lni-more-alt"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-end"
+                                                            aria-labelledby="moreAction1">
+                                                            <li class="dropdown-item">
+                                                                <a href="#0" class="text-gray">Remove</a>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <a href="#0" class="text-gray">Edit</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="product">
+                                                        <div class="image">
+                                                            <img src="assets/images/products/product-mini-4.jpg"
+                                                                alt="" />
+                                                        </div>
+                                                        <p class="text-sm">Kitchen</p>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm">Interior</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm">$345</p>
+                                                </td>
+                                                <td>
+                                                    <span class="status-btn close-btn">Canceled</span>
+                                                </td>
+                                                <td>
+                                                    <div class="action justify-content-end">
+                                                        <button class="edit">
+                                                            <i class="lni lni-pencil"></i>
+                                                        </button>
+                                                        <button class="more-btn ml-10 dropdown-toggle" id="moreAction1"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="lni lni-more-alt"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-end"
+                                                            aria-labelledby="moreAction1">
+                                                            <li class="dropdown-item">
+                                                                <a href="#0" class="text-gray">Remove</a>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <a href="#0" class="text-gray">Edit</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- End Table -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Col -->
+                    </div>
+
                 </div>
             </div>
-        </div>
-
-    </div>
+            <!-- end container -->
+    </section>
+    <!-- ========== section end ========== -->
 @endsection
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener("DOMContentLoaded", function() {
 
-            const isDark = document.documentElement.classList.contains('dark');
+            const canvas = document.getElementById("Chart1");
 
-            // Chart 1
-            new Chart(document.getElementById('Chart1'), {
-                type: 'line',
+            if (!canvas) {
+                console.error("Canvas Chart1 tidak ditemukan!");
+                return;
+            }
+
+            const ctx1 = canvas.getContext("2d");
+
+            new Chart(ctx1, {
+                type: "line",
                 data: {
-                    /* data sama */
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov',
-                        'Dec'
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov",
+                        "Dec"
                     ],
                     datasets: [{
-                        label: 'Pendapatan',
-                        data: [620, 810, 760, 890, 950, 870, 910, 780, 930, 900, 980, 1150],
-                        borderColor: '#10b981',
-                        backgroundColor: isDark ? 'rgba(16, 185, 129, 0.15)' :
-                            'rgba(16, 185, 129, 0.08)',
-                        borderWidth: 5,
+                        label: "Penjualan",
+                        data: [600, 800, 750, 880, 940, 880, 900, 770, 920, 890, 976, 1100],
+                        borderColor: "#365CF5",
+                        backgroundColor: "rgba(54, 92, 245, 0.2)",
+                        fill: true,
                         tension: 0.4,
-                        pointRadius: 0
+                        pointRadius: 4
                     }]
                 },
                 options: {
@@ -292,71 +397,12 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            display: false
+                            display: true
                         }
                     },
                     scales: {
                         y: {
-                            grid: {
-                                color: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)',
-                                display: true
-                            }
-                        },
-                        x: {
-                            grid: {
-                                color: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)'
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Chart 4 - Bar
-            new Chart(document.getElementById('Chart4'), {
-                type: 'line',
-                data: {
-                    labels: chartLabelsProduk.length ? chartLabelsProduk : ['Tidak Ada Data'],
-
-                    datasets: [{
-                            label: 'Stok Produk',
-                            data: chartStokProduk.length ? chartStokProduk : [0],
-                            borderColor: '#10b981',
-                            borderWidth: 4,
-                            tension: 0.3
-                        },
-                        {
-                            label: 'Stok Minimal',
-                            data: chartStokProduk.map(() => 10), // fallback sederhana
-                            borderColor: '#ef4444',
-                            borderWidth: 4,
-                            tension: 0.3
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                            align: 'end',
-                            labels: {
-                                color: isDark ? '#e5e7eb' : '#374151'
-                            }
-                        }
-                    },
-
-                    scales: {
-                        y: {
-                            grid: {
-                                color: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)'
-                            }
-                        },
-                        x: {
-                            grid: {
-                                color: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)'
-                            }
+                            beginAtZero: true
                         }
                     }
                 }
@@ -365,7 +411,95 @@
         });
     </script>
     <script>
-        const chartLabelsProduk = @json($labelsProduk ?? []);
-        const chartStokProduk = @json($stokProduk ?? []);
+        document.addEventListener("DOMContentLoaded", function() {
+
+            const canvas2 = document.getElementById("Chart2");
+
+            if (!canvas2) {
+                console.error("Canvas Chart2 tidak ditemukan!");
+                return;
+            }
+
+            const ctx2 = canvas2.getContext("2d");
+
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov',
+                        'Des'
+                    ],
+                    datasets: [{
+                        label: 'Revenue',
+                        data: [120, 190, 300, 250, 220, 310, 400, 380, 450, 500, 480, 600],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            const calendarEl = document.getElementById("calendar-mini");
+
+            if (!calendarEl) {
+                console.error("Calendar tidak ditemukan!");
+                return;
+            }
+
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                height: 350,
+
+                headerToolbar: {
+                    left: 'prev,next',
+                    center: 'title',
+                    right: 'today'
+                },
+
+                events: [{
+                        title: 'Panen Buah',
+                        start: '2026-04-10'
+                    },
+                    {
+                        title: 'Pengiriman',
+                        start: '2026-04-15'
+                    }
+                ]
+            });
+
+            calendar.render();
+
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+
+            $('#salesTable').DataTable({
+                responsive: true,
+                pageLength: 5,
+
+                language: {
+                    search: "Cari:",
+                    lengthMenu: "Tampilkan _MENU_ data",
+                    info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+                    paginate: {
+                        next: "Next",
+                        previous: "Prev"
+                    }
+                }
+            });
+
+        });
     </script>
 @endpush

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use App\Models\Kategori;
 use App\Models\Produk;
+use App\Models\Supplier;
 
 class DashboardController extends Controller
 {
@@ -18,20 +18,7 @@ class DashboardController extends Controller
 
         $title = 'Dashboard';
 
-        // =========================
-        // CHART PRODUK (STOK)
-        // =========================
-        $produks = Produk::select('nama_buah', 'stok')
-            ->orderBy('stok', 'desc')
-            ->limit(10)
-            ->get();
-
-        $labelsProduk = $produks->pluck('nama_buah');
-        $stokProduk   = $produks->pluck('stok');
-
-        // =========================
-        // VIEW ROLE
-        // =========================
+       
         $views = [
             'admin'   => 'dashboard.admin.index',
             'manager' => 'dashboard.manager.index',
@@ -39,17 +26,12 @@ class DashboardController extends Controller
             'gudang'  => 'dashboard.gudang.index',
         ];
 
-        if (!array_key_exists($user->role, $views)) {
+        if (!isset($views[$user->role])) {
             abort(403, 'Role tidak dikenali');
         }
 
         return view($views[$user->role], compact(
             'title',
-            'user',
-
-            // produk
-            'labelsProduk',
-            'stokProduk'
         ));
     }
 }
