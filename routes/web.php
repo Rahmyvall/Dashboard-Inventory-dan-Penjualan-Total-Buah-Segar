@@ -7,6 +7,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\PelangganController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -61,6 +62,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::resource('kategori', KategoriController::class);
     Route::resource('produk', ProdukController::class);
+    Route::resource('pelanggan', PelangganController::class);
 
     // ADMIN SUPPLIER CRUD (tetap pakai supplier)
     Route::resource('supplier', SupplierController::class);

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProdukApiController;
 use App\Http\Controllers\Api\KategoriApiController;
 use App\Http\Controllers\Api\SupplierApiController;
+use App\Http\Controllers\Api\PelangganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +44,27 @@ Route::prefix('supplier')->group(function () {
 
     // DELETE
     Route::delete('/{id}', [SupplierApiController::class, 'destroy']);
+});
+
+
+// =======================
+// PELANGGAN API (NEW 🔥)
+// =======================
+Route::prefix('pelanggan')->group(function () {
+
+    // 🔥 GET + SEARCH + FILTER (optional nanti bisa dikembangkan)
+    Route::get('/', [PelangganController::class, 'index']);
+
+    // DETAIL
+    Route::get('/{id}', [PelangganController::class, 'show']);
+
+    // CREATE (auto generate kode)
+    Route::post('/', [PelangganController::class, 'store']);
+
+    // UPDATE
+    Route::put('/{id}', [PelangganController::class, 'update']);
+    Route::post('/{id}', [PelangganController::class, 'update']); // opsional biar fleksibel
+
+    // DELETE
+    Route::delete('/{id}', [PelangganController::class, 'destroy']);
 });

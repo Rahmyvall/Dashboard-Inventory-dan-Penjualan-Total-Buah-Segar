@@ -56,7 +56,7 @@
                              </a>
                          </li>
                          <li>
-                             <a href="#">
+                             <a href="{{ route('pelanggan.index') }}">
                                  <i class="fas fa-users"></i> Pelanggan
                              </a>
                          </li>
