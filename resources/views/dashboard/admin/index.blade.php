@@ -89,14 +89,17 @@
                             <!-- HEADER -->
                             <div class="d-flex justify-content-between align-items-center mb-20">
                                 <div>
-                                    <h6 style="color:#888;">Yearly Stats</h6>
-                                    <h2 style="font-weight:700;">$245,479</h2>
+                                    <h6 style="color:#888;">Total Nilai Produk</h6>
+
+                                    <h2 style="font-weight:700;">
+                                        Rp {{ number_format(array_sum($totals ?? []), 0, ',', '.') }}
+                                    </h2>
                                 </div>
 
-                                <select class="form-select form-select-sm" style="width:auto; border-radius:10px;">
-                                    <option>Yearly</option>
-                                    <option>Monthly</option>
-                                    <option>Weekly</option>
+                                <select id="filterChart" class="form-select form-select-sm" style="width:auto;">
+                                    <option value="year">Yearly</option>
+                                    <option value="month">Monthly</option>
+                                    <option value="week">Weekly</option>
                                 </select>
                             </div>
 
@@ -390,45 +393,48 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
 
-            const canvas = document.getElementById("Chart1");
+            let chart;
 
-            if (!canvas) {
-                console.error("Canvas Chart1 tidak ditemukan!");
-                return;
+            function renderChart(labels, data) {
+                const ctx = document.getElementById('Chart1').getContext('2d');
+
+                if (chart) {
+                    chart.destroy();
+                }
+
+                chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Total Nilai Produk',
+                            data: data,
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
             }
 
-            const ctx1 = canvas.getContext("2d");
+            // 🔥 LOAD DATA AWAL DARI CONTROLLER
+            renderChart(
+                @json($labels ?? []),
+                @json($totals ?? [])
+            );
 
-            new Chart(ctx1, {
-                type: "line",
-                data: {
-                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov",
-                        "Dec"
-                    ],
-                    datasets: [{
-                        label: "Penjualan",
-                        data: [600, 800, 750, 880, 940, 880, 900, 770, 920, 890, 976, 1100],
-                        borderColor: "#365CF5",
-                        backgroundColor: "rgba(54, 92, 245, 0.2)",
-                        fill: true,
-                        tension: 0.4,
-                        pointRadius: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: true
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
+            // 🔥 FILTER DROPDOWN
+            document.getElementById('filterChart').addEventListener('change', function() {
+                let type = this.value;
+
+                fetch(`/chart-produk?type=${type}`)
+                    .then(res => res.json())
+                    .then(res => {
+                        renderChart(res.labels, res.data);
+                    });
             });
 
         });

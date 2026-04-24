@@ -8,7 +8,6 @@
     <!-- Tailwind WAJIB -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <!-- Font -->
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@600;700&display=swap"

@@ -38,6 +38,9 @@ Route::post('/logout', [AuthController::class, 'logout'])
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
+         // 🔥 TAMBAHAN: API CHART PRODUK
+    Route::get('/chart-produk', [DashboardController::class, 'chartProduk'])
+        ->name('chart.produk');
 });
 
 

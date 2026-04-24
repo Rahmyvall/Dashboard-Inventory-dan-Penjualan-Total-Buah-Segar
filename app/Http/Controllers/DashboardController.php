@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Models\Supplier;
 
@@ -18,7 +20,26 @@ class DashboardController extends Controller
 
         $title = 'Dashboard';
 
-       
+        // 🔥 DATA CHART PRODUK
+        $data = DB::table('produk')
+            ->selectRaw('MONTH(created_at) as bulan, SUM(harga_jual * stok) as total')
+            ->whereYear('created_at', date('Y'))
+            ->groupBy('bulan')
+            ->orderBy('bulan')
+            ->get();
+
+        $labels = [];
+        $totals = [];
+
+        foreach ($data as $d) {
+            $labels[] = date('F', mktime(0, 0, 0, $d->bulan, 10));
+            $totals[] = $d->total;
+        }
+
+        // 🔥 TOTAL PRODUK & SUPPLIER (optional tambahan dashboard)
+        $totalProduk = Produk::count();
+        $totalSupplier = Supplier::count();
+
         $views = [
             'admin'   => 'dashboard.admin.index',
             'manager' => 'dashboard.manager.index',
@@ -32,6 +53,43 @@ class DashboardController extends Controller
 
         return view($views[$user->role], compact(
             'title',
+            'labels',
+            'totals',
+            'totalProduk',
+            'totalSupplier'
         ));
+    }
+
+    // 🔥 API untuk filter chart (AJAX)
+    public function chartProduk(Request $request)
+    {
+        $type = $request->type;
+
+        if ($type == 'month') {
+            $format = 'DAY(created_at)';
+        } elseif ($type == 'week') {
+            $format = 'WEEK(created_at)';
+        } else {
+            $format = 'MONTH(created_at)';
+        }
+
+        $data = DB::table('produk')
+            ->selectRaw("$format as periode, SUM(harga_jual * stok) as total")
+            ->groupBy('periode')
+            ->orderBy('periode')
+            ->get();
+
+        $labels = [];
+        $totals = [];
+
+        foreach ($data as $d) {
+            $labels[] = $d->periode;
+            $totals[] = $d->total;
+        }
+
+        return response()->json([
+            'labels' => $labels,
+            'data' => $totals
+        ]);
     }
 }
