@@ -17,7 +17,7 @@ return new class extends Migration
     $table->string('username', 50)->unique();
     $table->string('password');
     $table->string('nama_lengkap', 100);
-    $table->enum('role', ['admin', 'manager', 'kasir', 'gudang']);
+    $table->enum('role', ['admin', 'manager', 'kasir', 'gudang','user']);
     $table->boolean('is_active')->default(true);
 
     // Tambahkan ini:

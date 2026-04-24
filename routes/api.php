@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\ProdukApiController;
 use App\Http\Controllers\Api\KategoriApiController;
 use App\Http\Controllers\Api\SupplierApiController;
 use App\Http\Controllers\Api\PelangganController;
+use App\Http\Controllers\Api\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,8 @@ Route::prefix('produk')->group(function () {
     Route::get('/', [ProdukApiController::class, 'index']);
     Route::get('/{id}', [ProdukApiController::class, 'show']);
     Route::post('/', [ProdukApiController::class, 'store']);
-    Route::post('/{id}', [ProdukApiController::class, 'update']);
+    Route::post('/{id}', [ProdukApiController::class, 'update']); // fleksibel
+    Route::put('/{id}', [ProdukApiController::class, 'update']);  // RESTful
     Route::delete('/{id}', [ProdukApiController::class, 'destroy']);
 });
 
@@ -30,41 +32,47 @@ Route::prefix('produk')->group(function () {
 // =======================
 Route::prefix('supplier')->group(function () {
 
-    // 🔥 GET + SEARCH + FILTER
     Route::get('/', [SupplierApiController::class, 'index']);
-
-    // DETAIL
     Route::get('/{id}', [SupplierApiController::class, 'show']);
-
-    // CREATE
     Route::post('/', [SupplierApiController::class, 'store']);
-
-    // UPDATE (upload foto)
-    Route::post('/{id}', [SupplierApiController::class, 'update']);
-
-    // DELETE
+    Route::post('/{id}', [SupplierApiController::class, 'update']); // fleksibel
+    Route::put('/{id}', [SupplierApiController::class, 'update']);
     Route::delete('/{id}', [SupplierApiController::class, 'destroy']);
 });
 
 
 // =======================
-// PELANGGAN API (NEW 🔥)
+// PELANGGAN API
 // =======================
 Route::prefix('pelanggan')->group(function () {
 
-    // 🔥 GET + SEARCH + FILTER (optional nanti bisa dikembangkan)
     Route::get('/', [PelangganController::class, 'index']);
+    Route::get('/{id}', [PelangganController::class, 'show']);
+    Route::post('/', [PelangganController::class, 'store']);
+    Route::put('/{id}', [PelangganController::class, 'update']);
+    Route::post('/{id}', [PelangganController::class, 'update']); // fleksibel
+    Route::delete('/{id}', [PelangganController::class, 'destroy']);
+});
+
+
+// =======================
+// USERS API (🔥 TAMBAHAN)
+// =======================
+Route::prefix('users')->group(function () {
+
+    // LIST + SEARCH + FILTER
+    Route::get('/', [UserController::class, 'index']);
 
     // DETAIL
-    Route::get('/{id}', [PelangganController::class, 'show']);
+    Route::get('/{id}', [UserController::class, 'show']);
 
-    // CREATE (auto generate kode)
-    Route::post('/', [PelangganController::class, 'store']);
+    // CREATE
+    Route::post('/', [UserController::class, 'store']);
 
     // UPDATE
-    Route::put('/{id}', [PelangganController::class, 'update']);
-    Route::post('/{id}', [PelangganController::class, 'update']); // opsional biar fleksibel
+    Route::put('/{id}', [UserController::class, 'update']);
+    Route::post('/{id}', [UserController::class, 'update']); // fleksibel
 
     // DELETE
-    Route::delete('/{id}', [PelangganController::class, 'destroy']);
+    Route::delete('/{id}', [UserController::class, 'destroy']);
 });

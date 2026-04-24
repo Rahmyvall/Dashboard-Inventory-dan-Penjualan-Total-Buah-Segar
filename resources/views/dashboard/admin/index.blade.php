@@ -390,55 +390,86 @@
 @endsection
 
 @push('scripts')
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
+   <script>
+document.addEventListener("DOMContentLoaded", function () {
 
-            let chart;
+    let chart;
 
-            function renderChart(labels, data) {
-                const ctx = document.getElementById('Chart1').getContext('2d');
+    function renderChart(labels, data) {
+        const ctx = document.getElementById('Chart1').getContext('2d');
 
-                if (chart) {
-                    chart.destroy();
-                }
+        if (chart) {
+            chart.destroy();
+        }
 
-                chart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'Total Nilai Produk',
-                            data: data,
-                            tension: 0.4,
-                            fill: true
-                        }]
+        chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Total Nilai Produk',
+                    data: data,
+                    tension: 0.4, // garis smooth
+                    fill: true,
+                    borderColor: '#4F46E5',
+                    backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                    pointBackgroundColor: '#4F46E5',
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true
                     },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
                     }
-                });
+                },
+                interaction: {
+                    mode: 'nearest',
+                    axis: 'x',
+                    intersect: false
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0,0,0,0.05)'
+                        }
+                    }
+                }
             }
-
-            // 🔥 LOAD DATA AWAL DARI CONTROLLER
-            renderChart(
-                @json($labels ?? []),
-                @json($totals ?? [])
-            );
-
-            // 🔥 FILTER DROPDOWN
-            document.getElementById('filterChart').addEventListener('change', function() {
-                let type = this.value;
-
-                fetch(`/chart-produk?type=${type}`)
-                    .then(res => res.json())
-                    .then(res => {
-                        renderChart(res.labels, res.data);
-                    });
-            });
-
         });
-    </script>
+    }
+
+    // 🔥 DATA AWAL
+    renderChart(
+        @json($labels ?? []),
+        @json($totals ?? [])
+    );
+
+    // 🔥 FILTER
+    document.getElementById('filterChart').addEventListener('change', function () {
+        let type = this.value;
+
+        fetch(`/chart-produk?type=${type}`)
+            .then(res => res.json())
+            .then(res => {
+                renderChart(res.labels, res.data);
+            });
+    });
+
+});
+</script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
 
