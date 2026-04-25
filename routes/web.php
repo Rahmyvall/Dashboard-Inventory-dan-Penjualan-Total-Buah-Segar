@@ -9,6 +9,9 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\PembelianController;
+use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\LaporanPenjualanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +45,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
-// ==================== FRONTEND MARKETPLACE ====================
+// ==================== FRONTEND ====================
 Route::prefix('suppliers')->name('suppliers.')->group(function () {
 
     Route::get('/', [FrontendController::class, 'supplier'])->name('index');
@@ -52,18 +55,27 @@ Route::prefix('suppliers')->name('suppliers.')->group(function () {
 });
 
 
-// ==================== ADMIN ONLY ====================
+// ==================== ADMIN ====================
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
-    // ✅ FIX: aktifkan semua route termasuk users.show
     Route::resource('users', UserController::class);
-
     Route::resource('kategori', KategoriController::class);
     Route::resource('produk', ProdukController::class);
     Route::resource('pelanggan', PelangganController::class);
     Route::resource('supplier', SupplierController::class);
 
-    // EXPORT SUPPLIER
+    // 🛒 PENJUALAN (ADMIN)
+    Route::resource('penjualan', PenjualanController::class);
+
+    // 📊 LAPORAN PENJUALAN
+    Route::prefix('laporan-penjualan')->name('laporan.penjualan.')->group(function () {
+        //Route::get('/harian', [LaporanPenjualanController::class, 'harian'])->name('harian');
+        //Route::get('/bulanan', [LaporanPenjualanController::class, 'bulanan'])->name('bulanan');
+        //Route::get('/laba-rugi', [LaporanPenjualanController::class, 'labaRugi'])->name('laba');
+        //Route::get('/filter', [LaporanPenjualanController::class, 'filter'])->name('filter');
+    });
+
+    // 📦 EXPORT SUPPLIER
     Route::prefix('supplier')->name('supplier.')->group(function () {
         Route::get('/export-excel', [SupplierController::class, 'exportExcel'])->name('excel');
         Route::get('/export-pdf', [SupplierController::class, 'exportPdf'])->name('pdf');
@@ -71,19 +83,22 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 
-// ==================== ROLE LAIN ====================
-
-// MANAGER
-Route::middleware(['auth', 'role:manager'])->group(function () {
-    // route manager
-});
-
-// KASIR
-Route::middleware(['auth', 'role:kasir'])->group(function () {
-    // route kasir
-});
-
-// GUDANG
+// ==================== GUDANG ====================
 Route::middleware(['auth', 'role:gudang'])->group(function () {
-    // route gudang
+    //Route::resource('pembelian', PembelianController::class);
+});
+
+
+// ==================== MANAGER ====================
+Route::middleware(['auth', 'role:manager'])->group(function () {
+    // laporan manager bisa tambah nanti
+});
+
+
+// ==================== KASIR ====================
+Route::middleware(['auth', 'role:kasir'])->group(function () {
+
+    // 🛒 TRANSAKSI KASIR
+    Route::resource('penjualan', PenjualanController::class);
+
 });

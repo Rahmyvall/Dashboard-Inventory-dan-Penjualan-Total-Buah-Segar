@@ -169,8 +169,25 @@
                          <span class="text">Penjualan</span>
                      </a>
                      <ul id="ddmenu_penjualan" class="collapse dropdown-nav">
-                         <li><a href="#">Transaksi Baru (Kasir)</a></li>
-                         <li><a href="#">Daftar Penjualan Hari Ini</a></li>
+
+                         <li>
+                             <a href="{{ route('penjualan.create') }}">
+                                 🛒 Transaksi Baru (Kasir)
+                             </a>
+                         </li>
+
+                         <li>
+                             <a href="{{ route('penjualan.index') }}">
+                                 📋 Semua Penjualan
+                             </a>
+                         </li>
+
+                         <li>
+                             <a href="{{ route('penjualan.index', ['tanggal' => date('Y-m-d')]) }}">
+                                 📅 Penjualan Hari Ini
+                             </a>
+                         </li>
+
                      </ul>
                  </li>
              @endif

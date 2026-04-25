@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\ProdukApiController;
 use App\Http\Controllers\Api\KategoriApiController;
 use App\Http\Controllers\Api\SupplierApiController;
 use App\Http\Controllers\Api\PelangganController;
+use App\Http\Controllers\Api\PenjualanApiController;
 use App\Http\Controllers\Api\UserController;
 
 /*
@@ -54,7 +55,12 @@ Route::prefix('pelanggan')->group(function () {
     Route::delete('/{id}', [PelangganController::class, 'destroy']);
 });
 
-
+Route::prefix('penjualan')->group(function () {
+    Route::get('/', [PenjualanApiController::class, 'index']);
+    Route::post('/', [PenjualanApiController::class, 'store']);
+    Route::get('/{id}', [PenjualanApiController::class, 'show']);
+    Route::delete('/{id}', [PenjualanApiController::class, 'destroy']);
+});
 // =======================
 // USERS API (🔥 TAMBAHAN)
 // =======================

@@ -66,15 +66,21 @@
                                 <i class="lni lni-user"></i>
                             </div>
                             <div class="content">
-                                <h6 class="mb-10">New User</h6>
-                                <h3 class="text-bold mb-10">34567</h3>
-                                <p class="text-sm text-danger">
-                                    <i class="lni lni-arrow-down"></i> -25.00%
-                                    <span class="text-gray"> Earning</span>
+                                <h6 class="mb-10">Total Users</h6>
+
+                                {{-- 🔥 TOTAL USER --}}
+                                <h3 class="text-bold mb-10">
+                                    {{ number_format($totalUsers) }}
+                                </h3>
+
+                                {{-- 🔥 USER BARU HARI INI --}}
+                                <p class="text-sm text-success">
+                                    <i class="lni lni-arrow-up"></i>
+                                    {{ $newUsers }} User Baru
+                                    <span class="text-gray"> Hari Ini</span>
                                 </p>
                             </div>
                         </div>
-                        <!-- End Icon Cart -->
                     </div>
                     <!-- End Col -->
                 </div>
@@ -390,86 +396,86 @@
 @endsection
 
 @push('scripts')
-   <script>
-document.addEventListener("DOMContentLoaded", function () {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
 
-    let chart;
+            let chart;
 
-    function renderChart(labels, data) {
-        const ctx = document.getElementById('Chart1').getContext('2d');
+            function renderChart(labels, data) {
+                const ctx = document.getElementById('Chart1').getContext('2d');
 
-        if (chart) {
-            chart.destroy();
-        }
-
-        chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Total Nilai Produk',
-                    data: data,
-                    tension: 0.4, // garis smooth
-                    fill: true,
-                    borderColor: '#4F46E5',
-                    backgroundColor: 'rgba(79, 70, 229, 0.2)',
-                    pointBackgroundColor: '#4F46E5',
-                    pointRadius: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true
-                    },
-                    tooltip: {
-                        mode: 'index',
-                        intersect: false
-                    }
-                },
-                interaction: {
-                    mode: 'nearest',
-                    axis: 'x',
-                    intersect: false
-                },
-                scales: {
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: 'rgba(0,0,0,0.05)'
-                        }
-                    }
+                if (chart) {
+                    chart.destroy();
                 }
+
+                chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Total Nilai Produk',
+                            data: data,
+                            tension: 0.4, // garis smooth
+                            fill: true,
+                            borderColor: '#4F46E5',
+                            backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                            pointBackgroundColor: '#4F46E5',
+                            pointRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: true
+                            },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false
+                            }
+                        },
+                        interaction: {
+                            mode: 'nearest',
+                            axis: 'x',
+                            intersect: false
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(0,0,0,0.05)'
+                                }
+                            }
+                        }
+                    }
+                });
             }
-        });
-    }
 
-    // 🔥 DATA AWAL
-    renderChart(
-        @json($labels ?? []),
-        @json($totals ?? [])
-    );
+            // 🔥 DATA AWAL
+            renderChart(
+                @json($labels ?? []),
+                @json($totals ?? [])
+            );
 
-    // 🔥 FILTER
-    document.getElementById('filterChart').addEventListener('change', function () {
-        let type = this.value;
+            // 🔥 FILTER
+            document.getElementById('filterChart').addEventListener('change', function() {
+                let type = this.value;
 
-        fetch(`/chart-produk?type=${type}`)
-            .then(res => res.json())
-            .then(res => {
-                renderChart(res.labels, res.data);
+                fetch(`/chart-produk?type=${type}`)
+                    .then(res => res.json())
+                    .then(res => {
+                        renderChart(res.labels, res.data);
+                    });
             });
-    });
 
-});
-</script>
+        });
+    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
 
